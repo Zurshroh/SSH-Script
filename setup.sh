@@ -1,6 +1,13 @@
 #!/bin/bash
 dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
 
+
+from keygen import keys
+
+if keys.valid('email', 'license_key', 'public_key'):
+    pass    # The license key is valid.
+else:
+    pass    # The license key is invalid.
 # // Exporting Language to UTF-8
 export LANG='en_US.UTF-8'
 export LANGUAGE='en_US.UTF-8'
