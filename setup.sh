@@ -39,10 +39,19 @@ export BOLD="\e[1m"
 export WARNING="${RED}\e[5m"
 export UNDERLINE="\e[4m"
 
-# // Validate Successfull
-echo ""
-read -p "$( echo -e "Press ${CYAN}[ ${NC}${GREEN}Enter${NC} ${CYAN}]${NC} For Starting Installation") "
-echo ""
+MYIP=$(wget -qO- ipv4.icanhazip.com);
+#check registered ip
+wget -q -O izin http://188.166.215.119:85/ocs/ip.txt
+if ! grep -w -q $MYIP izin; then
+	echo "Sorry, only registered IPs can use this script!"
+	if [[ $vps = "vps" ]]; then
+		echo "LULUS SENSOR"
+	else
+		echo "LULUS SENSOR"
+	fi
+	rm -f /root/izin
+	exit
+fi
 
 # // cek old script
 if [[ -r /etc/xray/domain ]]; then
@@ -287,22 +296,13 @@ else
     exit 1
 fi
 
-#install jembot
-echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
-echo -e " \E[41;1;39m           ⇱ Install Jembot ⇲            \E[0m$NC"
-echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
+echo -e "install VNAT"
 sleep 1 
 wget -q https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/jembot.sh && chmod +x jembot.sh && ./jembot.sh
-#install ssh-vpn
-echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
-echo -e " \E[41;1;39m          ⇱ Install SSH / WS ⇲           \E[0m$NC"
-echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
+echo -e "install ssh-vpn"
 sleep 1
 wget -q https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
-#install ins-xray
-echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
-echo -e " \E[41;1;39m            ⇱ Install Xray ⇲             \E[0m$NC"
-echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
+echo -e "install ins-xray"
 sleep 1 
 wget -q https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
 
