@@ -1,5 +1,6 @@
 #!/bin/bash
 dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
+#########################
 
 BURIQ () {
     curl -sS https://raw.githubusercontent.com/Locu-Locu/awok/main/ipmini > /root/tmp
@@ -31,7 +32,7 @@ CekTwo=$(cat /etc/.$Name.ini)
         res="Expired"
     fi
 else
-res="Permission Accepted..." | lolcat r
+res="Permission Accepted..." | lolcat 
 fi
 }
 
@@ -134,7 +135,7 @@ apt autoremove -y
 apt update -y
 
 # // Install Requirement Tools
-apt-get --reinstall --fix-missing install -y sudo dpkg psmisc socat jq ruby wondershaper python2 tmux nmap bzip2 gzip coreutils wget screen rsyslog iftop htop net-tools zip unzip wget vim net-tools curl nano sed screen gnupg gnupg1 bc apt-transport-https build-essential gcc g++ automake make autoconf perl m4 dos2unix dropbear libreadline-dev zlib1g-dev libssl-dev dirmngr libxml-parser-perl neofetch git lsof iptables iptables-persistent lolcat
+apt-get --reinstall --fix-missing install -y sudo dpkg psmisc socat jq ruby wondershaper python2 tmux nmap socat bzip2 gzip coreutils wget screen rsyslog iftop htop net-tools zip unzip wget vim net-tools curl nano sed screen gnupg gnupg1 bc apt-transport-https build-essential gcc g++ automake make autoconf perl m4 dos2unix dropbear libreadline-dev zlib1g-dev libssl-dev dirmngr libxml-parser-perl neofetch git lsof iptables iptables-persistent lolcat
 apt-get --reinstall --fix-missing install -y libreadline-dev zlib1g-dev libssl-dev python2 screen curl jq bzip2 gzip coreutils rsyslog iftop htop zip unzip net-tools sed gnupg gnupg1 bc sudo apt-transport-https build-essential dirmngr libxml-parser-perl neofetch screenfetch git lsof openssl easy-rsa fail2ban tmux vnstat dropbear libsqlite3-dev socat cron bash-completion ntpdate xz-utils sudo apt-transport-https gnupg2 gnupg1 dnsutils lsb-release chrony
 gem install lolcat
 
@@ -335,19 +336,19 @@ fi
 GitUser="Locu-Locu"
 #install Vnat
 echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
-echo -e "         ⇱ Install Vnat ⇲            	" |lolcat -a
+echo -e "         ⇱ Install Vnat ⇲            	" |lolcat 
 echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
 sleep 1 
 wget -q https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/Vnat.sh && chmod +x Vnat.sh && ./Vnat.sh
 #install ssh-vpn
 echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
-echo -e " \E[41;1;39m          ⇱ Install SSH / WS ⇲           \E[0m$NC"  |lolcat -a
+echo -e " \E[41;1;39m          ⇱ Install SSH / WS ⇲           \E[0m$NC"  
 echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
 sleep 1
 wget -q https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
 #install ins-xray
 echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
-echo -e " \E[41;1;39m            ⇱ Install Xray ⇲             \E[0m$NC"  |lolcat -a
+echo -e " \E[41;1;39m            ⇱ Install Xray ⇲             \E[0m$NC"  
 echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
 sleep 1 
 wget -q https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
