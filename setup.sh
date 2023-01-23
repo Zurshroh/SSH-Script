@@ -5,23 +5,18 @@ dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Dat
 red='\e[1;31m'
 green='\e[0;32m'
 NC='\e[0m'
-MYIP=$( curl -s https://ipinfo.io/ip/ );
-IZIN=$( curl https://raw.githubusercontent.com/Zuz99/permission/main/ipmini | grep $MYIP )
+MYIP=$(wget -qO- icanhazip.com);
+IZIN=$( curl -s https://raw.githubusercontent.com/Zuz99/permission/main/ipmini | grep $MYIP )
 if [ $MYIP = $IZIN ]; then
 echo -e "${green}Permission Accepted...${NC}"
 else
 echo -e "${red}Permission Denied!${NC}";
 echo "Please Contact Admin"
-echo "Telegram : t.me/sshsedang4"
-echo "Whatsapp : 082311190332"
+echo "Telegram : t.me/Locufarm"
+echo "Whatsapp : +628129xxxxxx"
 rm -f setup.sh
 exit 0
 fi
-if [ -f "/etc/v2ray/domain" ]; then
-echo "Script Already Installed"
-exit 0
-fi
-
 # // Root Checking
 if [ "${EUID}" -ne 0 ]; then
 		echo -e "${EROR} Please Run This Script As Root User !"
