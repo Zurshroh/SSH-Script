@@ -170,10 +170,11 @@ mkdir -p /usr/local/etc/xray
 
 # // String / Request Data
 sub=$(</dev/urandom tr -dc a-z0-9 | head -c4)
-DOMAIN=vpnmurah.me
-SUB_DOMAIN=${sub}.vpnmurah.me
-CF_ID=paoandest@gmail.com
-CF_KEY=1d158d0efc4eef787222cefff0b6d20981462
+DOMAIN=digvpn.my.id
+SUB_DOMAIN=gh-${sub}.digvpn.my.id
+NS_DOMAIN=ns-${sub}.digvpn.my.id
+CF_ID=andri.myid@gmail.com
+CF_KEY=1b2fb1e96e256e71b8b707613445dac391f8f
 set -euo pipefail
 IP=$(curl -sS ifconfig.me);
 echo "Updating DNS for ${SUB_DOMAIN}..."
