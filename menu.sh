@@ -41,74 +41,6 @@ export RECEIVE="[${YELLOW} RECEIVE ${NC}]"
 export BOLD="\e[1m"
 export WARNING="${RED}\e[5m"
 export UNDERLINE="\e[4m"
-'
-# // Exporting URL Host
-export Server_URL="raw.githubusercontent.com/Zuz99/test/main"
-export Server1_URL="raw.githubusercontent.com/Zuz99/limit/main"
-export Server_Port="443"
-export Server_IP="underfined"
-export Script_Mode="Stable"
-export Auther=".geovpn"
-
-# // Root Checking
-if [ "${EUID}" -ne 0 ]; then
-		echo -e "${EROR} Please Run This Script As Root User !"
-		exit 1
-fi
-
-# // Exporting IP Address
-export IP=$( curl -s https://ipinfo.io/ip/ )
-
-# // Exporting Network Interface
-export NETWORK_IFACE="$(ip route show to default | awk '{print $5}')"
-
-# // Validate Result ( 1 )
-touch /etc/${Auther}/license.key
-export Your_License_Key="$( cat /etc/${Auther}/license.key | awk '{print $1}' )"
-export Validated_Your_License_Key_With_Server="$( curl -s https://${Server_URL}/validated-registered-license-key.txt | grep -w $Your_License_Key | head -n1 | cut -d ' ' -f 1 )"
-if [[ "$Validated_Your_License_Key_With_Server" == "$Your_License_Key" ]]; then
-    validated='true'
-else
-    echo -e "${EROR} License Key Not Valid"
-    exit 1
-fi
-
-# // Checking VPS Status > Got Banned / No
-if [[ $IP == "$( curl -s https://${Server_URL}/blacklist.txt | cut -d ' ' -f 1 | grep -w $IP | head -n1 )" ]]; then
-    echo -e "${EROR} 403 Forbidden ( Your VPS Has Been Banned )"
-    exit  1
-fi
-
-# // Checking VPS Status > Got Banned / No
-if [[ $Your_License_Key == "$( curl -s https://${Server_URL} | cut -d ' ' -f 1 | grep -w $Your_License_Key | head -n1)" ]]; then
-    echo -e "${EROR} 403 Forbidden ( Your License Has Been Limited )"
-    exit  1
-fi
-
-# // Checking VPS Status > Got Banned / No
-if [[ 'Standart' == "$( curl -s https://${Server_URL}/validated-registered-license-key.txt | grep -w $Your_License_Key | head -n1 | cut -d ' ' -f 6 )" ]]; then 
-    License_Mode='Standart'
-elif [[ Pro == "$( curl -s https://${Server_URL}/validated-registered-license-key.txt | grep -w $Your_License_Key | head -n1 | cut -d ' ' -f 6 )" ]]; then 
-    License_Mode='Pro'
-else
-    echo -e "${EROR} Please Using Genuine License !"
-    exit 1
-fi
-
-# // Checking Script Expired
-exp=$( curl -s https://${Server1_URL}/limit.txt | grep -w $IP | cut -d ' ' -f 3 )
-now=`date -d "0 days" +"%Y-%m-%d"`
-expired_date=$(date -d "$exp" +%s)
-now_date=$(date -d "$now" +%s)
-sisa_hari=$(( ($expired_date - $now_date) / 86400 ))
-if [[ $sisa_hari -lt 0 ]]; then
-    echo $sisa_hari > /etc/${Auther}/license-remaining-active-days.db
-    echo -e "${EROR} Your License Key Expired ( $sisa_hari Days )"
-    exit 1
-else
-    echo $sisa_hari > /etc/${Auther}/license-remaining-active-days.db
-fi
-'
 # // Clear
 clear
 clear && clear && clear
@@ -219,47 +151,47 @@ export Server_URL="raw.githubusercontent.com/Zuz99/test/main"
 #License_Key=$(cat /etc/${Auther}/license.key)
 #export Nama_Issued_License=$( curl -s https://${Server_URL}/validated-registered-license-key.txt | grep -w $License_Key | cut -d ' ' -f 7-100 | tr -d '\r' | tr -d '\r\n')
 clear
-echo -e "${BICyan} ┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "${BICyan} │                  ${BIWhite}${UWhite}Server Informations${NC}"
-echo -e "${BICyan} │"
-echo -e " ${BICyan}│  ${BICyan}Use Core        :  ${BIPurple}Kenn Hiroyuki${NC}"
-echo -e " ${BICyan}│  ${BICyan}Current Domain  :  ${BIPurple}$(cat /etc/xray/domain)${NC}"
-echo -e " ${BICyan}│  ${BICyan}IP-VPS          :  ${BIYellow}$IPVPS${NC}"
-echo -e " ${BICyan}│  ${BICyan}ISP-VPS         :  ${BIYellow}$ISPVPS${NC}"
-echo -e " ${BICyan}└─────────────────────────────────────────────────────┘${NC}"
-echo -e "     ${BICyan} SSH ${NC}: $ressh"" ${BICyan} NGINX ${NC}: $resngx"" ${BICyan}  XRAY ${NC}: $resv2r"" ${BICyan} TROJAN ${NC}: $resv2r"
-echo -e "     ${BICyan}          DROPBEAR ${NC}: $resdbr" "${BICyan} SSH-WS ${NC}: $ressshws"
-echo -e "${BICyan} ┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "     ${BICyan}[${BIWhite}1${BICyan}] SSH ${BICyan}${BIYellow}${BICyan}${NC}" 
-echo -e "     ${BICyan}[${BIWhite}2${BICyan}] VMESS ${BICyan}${BIYellow}${BICyan}${NC}"    
-echo -e "     ${BICyan}[${BIWhite}3${BICyan}] VLESS ${BICyan}${BIYellow}${BICyan}${NC}"    
-echo -e "     ${BICyan}[${BIWhite}4${BICyan}] TROJAN ${BICyan}${BIYellow}${BICyan}${NC}" 
-echo -e "     ${BICyan}[${BIWhite}5${BICyan}] SHADOWSOCKS ${BICyan}${BIYellow}${BICyan}${NC}"    
-echo -e "     ${BICyan}[${BIWhite}6${BICyan}] TENDANG ${BICyan}${BIYellow}${BICyan}${NC}"    
-echo -e "     ${BICyan}[${BIWhite}7${BICyan}] AU-REBOOT ${BICyan}${BIYellow}${BICyan}${NC}"    
-echo -e "     ${BICyan}[${BIWhite}8${BICyan}] REBOOT ${BICyan}${BIYellow}${BICyan}${NC}"    
-echo -e "     ${BICyan}[${BIWhite}9${BICyan}] RESTART ${BICyan}${BIYellow}${BICyan}${NC}"    
-echo -e "     ${BICyan}[${BIWhite}10${BICyan}] BACKUP/RESTORE ${BICyan}${BIYellow}${BICyan}${NC}"   
-echo -e "     ${BICyan}[${BIWhite}11${BICyan}] ADD-HOST/DOMAIN ${BICyan}${BIYellow}${BICyan}${NC}" 
-echo -e "     ${BICyan}[${BIWhite}12${BICyan}] GEN-SSL ${BICyan}${BIYellow}${BICyan}${NC}"       
-echo -e "     ${BICyan}[${BIWhite}13${BICyan}] EDIT-BANNER ${BICyan}${BIYellow}${BICyan}${NC}" 
-echo -e "     ${BICyan}[${BIWhite}14${BICyan}] CEK-STATUS ${BICyan}${BIYellow}${BICyan}${NC}" 
-echo -e "     ${BICyan}[${BIWhite}15${BICyan}] CEK-TRAFIK ${BICyan}${BIYellow}${BICyan}${NC}" 
-echo -e "     ${BICyan}[${BIWhite}16${BICyan}] CEK-SPEED ${BICyan}${BIYellow}${BICyan}${NC}"
-echo -e "     ${BICyan}[${BIWhite}17${BICyan}] CEK-BANDWIDTH ${BICyan}${BIYellow}${BICyan}${NC}"
-#echo -e "     ${BICyan}[${BIWhite}18${BICyan}] CEK-USAGE-RAM ${BICyan}${BIYellow}${BICyan}${NC}"
-echo -e "     ${BICyan}[${BIWhite}18${BICyan}] LIMIT-SPEED ${BICyan}${BIYellow}${BICyan}${NC}"
-echo -e "     ${BICyan}[${BIWhite}19${BICyan}] WEBMIN ${BICyan}${BIYellow}${BICyan}${NC}"
-echo -e "     ${BICyan}[${BIWhite}20${BICyan}] INFO-SCRIPT ${BICyan}${BIYellow}${BICyan}${NC}" 
-echo -e "     ${BICyan}[${BIWhite}21${BICyan}] CLEAR-LOG ${BICyan}${BIYellow}${BICyan}${NC}" 
-#echo -e "     ${BICyan}[${BIWhite}99${BICyan}] UPDATE ${BICyan}${BIYellow}${BICyan}${NC}" 
-echo -e "     ${BICyan}[${BIWhite}x${BICyan}]  EXIT ${BICyan}${BIYellow}${BICyan}${NC}"  
-echo -e "${BICyan} └─────────────────────────────────────────────────────┘${NC}"
-echo -e " ${BICyan}┌─────────────────────────────────────┐${NC}"
-echo -e " ${BICyan}│  Version      ${NC} : $sem Last Update"
-echo -e " ${BICyan}│  User          :\033[1;36m $Nama_Issued_License \e[0m"
-#echo -e " ${BICyan}│  Expiry script${NC} : ${BIYellow}$(cat /etc/${Auther}/license-remaining-active-days.db)${NC} Days"
-echo -e " ${BICyan}└─────────────────────────────────────┘${NC}"
+echo -e "${BICyan} ┌─────────────────────────────────────────────────────┐${NC}"| lolcat 
+echo -e "${BICyan} │      Server Informations         |${NC}" | lolcat
+echo -e "${BICyan} │												     |"| lolcat
+echo -e " ${BICyan}│  ${BICyan}Use Core        :  DIGVPN"| lolcat
+echo -e " ${BICyan}│  ${BICyan}Current Domain  :  $(cat /etc/xray/domain)${NC}"| lolcat
+echo -e " ${BICyan}│  ${BICyan}IP-VPS          :  $IPVPS${NC}" | lolcat
+echo -e " ${BICyan}│  ${BICyan}ISP-VPS         :  $ISPVPS${NC}" | lolcat
+echo -e " ${BICyan}└─────────────────────────────────────────────────────┘${NC}" | lolcat
+echo -e "     ${BICyan} SSH ${NC}: $ressh"" ${BICyan} NGINX ${NC}: $resngx"" ${BICyan}  XRAY ${NC}: $resv2r"" ${BICyan} TROJAN ${NC}: $resv2r" | lolcat -a
+echo -e "     ${BICyan}          DROPBEAR ${NC}: $resdbr" "${BICyan} SSH-WS ${NC}: $ressshws" | lolcat -a
+echo -e "${BICyan} ┌─────────────────────────────────────────────────────┐${NC}" | lolcat
+echo -e "     ${BICyan}[${BIWhite}1${BICyan}] SSH ${BICyan}${BIYellow}${BICyan}${NC}" | lolcat
+echo -e "     ${BICyan}[${BIWhite}2${BICyan}] VMESS ${BICyan}${BIYellow}${BICyan}${NC}"    | lolcat
+echo -e "     ${BICyan}[${BIWhite}3${BICyan}] VLESS ${BICyan}${BIYellow}${BICyan}${NC}"    | lolcat
+echo -e "     ${BICyan}[${BIWhite}4${BICyan}] TROJAN ${BICyan}${BIYellow}${BICyan}${NC}" | lolcat
+echo -e "     ${BICyan}[${BIWhite}5${BICyan}] SHADOWSOCKS ${BICyan}${BIYellow}${BICyan}${NC}"    | lolcat
+echo -e "     ${BICyan}[${BIWhite}6${BICyan}] TENDANG ${BICyan}${BIYellow}${BICyan}${NC}"    | lolcat
+echo -e "     ${BICyan}[${BIWhite}7${BICyan}] AU-REBOOT ${BICyan}${BIYellow}${BICyan}${NC}"    | lolcat
+echo -e "     ${BICyan}[${BIWhite}8${BICyan}] REBOOT ${BICyan}${BIYellow}${BICyan}${NC}"    | lolcat
+echo -e "     ${BICyan}[${BIWhite}9${BICyan}] RESTART ${BICyan}${BIYellow}${BICyan}${NC}"    | lolcat
+echo -e "     ${BICyan}[${BIWhite}10${BICyan}] BACKUP/RESTORE ${BICyan}${BIYellow}${BICyan}${NC}"   | lolcat
+echo -e "     ${BICyan}[${BIWhite}11${BICyan}] ADD-HOST/DOMAIN ${BICyan}${BIYellow}${BICyan}${NC}" | lolcat
+echo -e "     ${BICyan}[${BIWhite}12${BICyan}] GEN-SSL ${BICyan}${BIYellow}${BICyan}${NC}"       | lolcat
+echo -e "     ${BICyan}[${BIWhite}13${BICyan}] EDIT-BANNER ${BICyan}${BIYellow}${BICyan}${NC}" | lolcat
+echo -e "     ${BICyan}[${BIWhite}14${BICyan}] CEK-STATUS ${BICyan}${BIYellow}${BICyan}${NC}" | lolcat
+echo -e "     ${BICyan}[${BIWhite}15${BICyan}] CEK-TRAFIK ${BICyan}${BIYellow}${BICyan}${NC}" | lolcat
+echo -e "     ${BICyan}[${BIWhite}16${BICyan}] CEK-SPEED ${BICyan}${BIYellow}${BICyan}${NC}"| lolcat
+echo -e "     ${BICyan}[${BIWhite}17${BICyan}] CEK-BANDWIDTH ${BICyan}${BIYellow}${BICyan}${NC}"| lolcat
+#echo -e "     ${BICyan}[${BIWhite}18${BICyan}] CEK-USAGE-RAM ${BICyan}${BIYellow}${BICyan}${NC}"| lolcat
+echo -e "     ${BICyan}[${BIWhite}18${BICyan}] LIMIT-SPEED ${BICyan}${BIYellow}${BICyan}${NC}"| lolcat
+echo -e "     ${BICyan}[${BIWhite}19${BICyan}] WEBMIN ${BICyan}${BIYellow}${BICyan}${NC}"| lolcat
+echo -e "     ${BICyan}[${BIWhite}20${BICyan}] INFO-SCRIPT ${BICyan}${BIYellow}${BICyan}${NC}" | lolcat
+echo -e "     ${BICyan}[${BIWhite}21${BICyan}] CLEAR-LOG ${BICyan}${BIYellow}${BICyan}${NC}" | lolcat
+#echo -e "     ${BICyan}[${BIWhite}99${BICyan}] UPDATE ${BICyan}${BIYellow}${BICyan}${NC}" | lolcat
+echo -e "     ${BICyan}[${BIWhite}x${BICyan}]  EXIT ${BICyan}${BIYellow}${BICyan}${NC}"  | lolcat
+echo -e "${BICyan} └─────────────────────────────────────────────────────┘${NC}"| lolcat
+echo -e " ${BICyan}┌─────────────────────────────────────┐${NC}"| lolcat
+echo -e " ${BICyan}│  Version      ${NC} : $sem Last Update"| lolcat
+echo -e " ${BICyan}│  User          :\033[1;36m $Nama_Issued_License \e[0m"| lolcat
+#echo -e " ${BICyan}│  Expiry script${NC} : ${BIYellow}$(cat /etc/${Auther}/license-remaining-active-days.db)${NC} Days"| lolcat
+echo -e " ${BICyan}└─────────────────────────────────────┘${NC}" | lolcat
 echo
 read -p " Select menu : " opt
 echo -e ""
