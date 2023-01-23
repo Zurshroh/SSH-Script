@@ -46,6 +46,7 @@ PERMISSION () {
     fi
     BURIQ
 }
+
 clear
 # // Root Checking
 if [ "${EUID}" -ne 0 ]; then
@@ -260,20 +261,20 @@ clear
 clear && clear && clear
 clear;clear;clear
 
-echo -e "${GREEN}Indonesian Language${NC}" | lolcat -S
-echo -e "${YELLOW}-----------------------------------------------------${NC}" | lolcat 
-echo -e "Silakan Pointing Domain Anda Ke IP VPS" | lolcat 
-echo -e "Untuk Caranya Arahkan NS Domain Ke Cloudflare" | lolcat 
-echo -e "Kemudian Tambahkan A Record Dengan IP VPS" | lolcat 
-echo -e "${YELLOW}-----------------------------------------------------${NC}" | lolcat 
-echo ""
 echo -e "${GREEN}Indonesian Language${NC}" | lolcat 
-echo -e "${YELLOW}-----------------------------------------------------${NC}" | lolcat 
-echo -e "Please Point Your Domain To IP VPS" | lolcat 
-echo -e "For Point NS Domain To Cloudflare" | lolcat 
-echo -e "Change NameServer On Domain To Cloudflare" | lolcat 
-echo -e "Then Add A Record With IP VPS" | lolcat 
-echo -e "${YELLOW}-----------------------------------------------------${NC}" | lolcat 
+echo -e "${YELLOW}-----------------------------------------------------${NC}" 
+echo -e "Silakan Pointing Domain Anda Ke IP VPS" 
+echo -e "Untuk Caranya Arahkan NS Domain Ke Cloudflare" 
+echo -e "Kemudian Tambahkan A Record Dengan IP VPS" 
+echo -e "${YELLOW}-----------------------------------------------------${NC}"
+echo ""
+echo -e "${GREEN}Indonesian Language${NC}" | 
+echo -e "${YELLOW}-----------------------------------------------------${NC}"
+echo -e "Please Point Your Domain To IP VPS"
+echo -e "For Point NS Domain To Cloudflare"
+echo -e "Change NameServer On Domain To Cloudflare"
+echo -e "Then Add A Record With IP VPS" 
+echo -e "${YELLOW}-----------------------------------------------------${NC}"
 echo ""
 echo ""
 
@@ -354,7 +355,7 @@ sleep 1
 wget -q https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
 
 # // Download Data
-echo -e "${GREEN}Download Data${NC}"
+echo -e "${GREEN}Download Data${NC}" | lolcat 
 wget -q -O /usr/bin/add-ws "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/add-ws.sh"
 wget -q -O /usr/bin/add-ssws "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/add-ssws.sh"
 #wget -q -O /usr/bin/add-socks "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/add-socks.sh"
