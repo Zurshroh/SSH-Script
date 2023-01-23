@@ -41,10 +41,7 @@ PERMISSION () {
     if [ "$MYIP" = "$IZIN" ]; then
     Bloman
     else
-    res="Permission Denied!" | lolcat
-echo "Please Contact Admin" | lolcat
-echo "Telegram : t.me/Locu"| lolcat
-echo "Whatsapp : wa.me/+62xxxxxxxx"| lolcat
+    res="Permission Denied!" 
     fi
     BURIQ
 }
