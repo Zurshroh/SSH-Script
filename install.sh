@@ -292,21 +292,21 @@ else
 fi
 
 #install jembot
-echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
-echo -e " \E[41;1;39m           ⇱ Install Jembot ⇲            \E[0m$NC"
-echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
+echo -e "$┌─────────────────────────────────────────┐${NC}"
+echo -e "$           ⇱ Install Jembot ⇲            $NC"
+echo -e "$└─────────────────────────────────────────┘${NC}"
 sleep 1 
 wget -q https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/jembot.sh && chmod +x jembot.sh && ./jembot.sh
 #install ssh-vpn
-echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
-echo -e " \E[41;1;39m          ⇱ Install SSH / WS ⇲           \E[0m$NC"
-echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
+echo -e "$─────────────────────────────────────────┐${NC}"
+echo -e "$          ⇱ Install SSH / WS ⇲           $NC"
+echo -e "$└─────────────────────────────────────────┘${NC}"
 sleep 1
 wget -q https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
 #install ins-xray
-echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
-echo -e " \E[41;1;39m            ⇱ Install Xray ⇲             \E[0m$NC"
-echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
+echo -e "$┌─────────────────────────────────────────┐${NC}"
+echo -e "             ⇱ Install Xray ⇲              $NC"
+echo -e "$└─────────────────────────────────────────┘${NC}"
 sleep 1 
 wget -q https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
 
