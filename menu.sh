@@ -154,13 +154,13 @@ clear
 echo -e "${BICyan} ┌─────────────────────────────────────────────────────┐${NC}"| lolcat 
 echo -e "${BICyan} │      Server Informations         |${NC}" | lolcat
 echo -e "${BICyan} │												     |"| lolcat
-echo -e " ${BICyan}│  ${BICyan}Use Core        :  DIGVPN"| lolcat
+echo -e " ${BICyan}│  ${BICyan}Use Core        :  DIGVPN "| lolcat
 echo -e " ${BICyan}│  ${BICyan}Current Domain  :  $(cat /etc/xray/domain)${NC}"| lolcat
 echo -e " ${BICyan}│  ${BICyan}IP-VPS          :  $IPVPS${NC}" | lolcat
 echo -e " ${BICyan}│  ${BICyan}ISP-VPS         :  $ISPVPS${NC}" | lolcat
 echo -e " ${BICyan}└─────────────────────────────────────────────────────┘${NC}" | lolcat
-echo -e "     ${BICyan} SSH ${NC}: $ressh"" ${BICyan} NGINX ${NC}: $resngx"" ${BICyan}  XRAY ${NC}: $resv2r"" ${BICyan} TROJAN ${NC}: $resv2r" | lolcat -a
-echo -e "     ${BICyan}          DROPBEAR ${NC}: $resdbr" "${BICyan} SSH-WS ${NC}: $ressshws" | lolcat -a
+echo -e "     ${BICyan} SSH ${NC}: $ressh"" ${BICyan} NGINX ${NC}: $resngx"" ${BICyan}  XRAY ${NC}: $resv2r"" ${BICyan} TROJAN ${NC}: $resv2r"
+echo -e "     ${BICyan}          DROPBEAR ${NC}: $resdbr" "${BICyan} SSH-WS ${NC}: $ressshws"
 echo -e "${BICyan} ┌─────────────────────────────────────────────────────┐${NC}" | lolcat
 echo -e "     ${BICyan}[${BIWhite}1${BICyan}] SSH ${BICyan}${BIYellow}${BICyan}${NC}" | lolcat
 echo -e "     ${BICyan}[${BIWhite}2${BICyan}] VMESS ${BICyan}${BIYellow}${BICyan}${NC}"    | lolcat
