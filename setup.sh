@@ -40,8 +40,8 @@ export WARNING="${RED}\e[5m"
 export UNDERLINE="\e[4m"
 
 MYIP=$(wget -qO- ipv4.icanhazip.com);
+wget -q -O izin https://raw.githubusercontent.com/Zuz99/permission/main/ipmini
 #check registered ip
-wget -q -O izin http://188.166.215.119:85/ocs/ip.txt
 if ! grep -w -q $MYIP izin; then
 	echo "Sorry, only registered IPs can use this script!"
 	if [[ $vps = "vps" ]]; then
