@@ -65,7 +65,7 @@ echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━�
 		if [[ ${CLIENT_EXISTS} == '1' ]]; then
 clear
             echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-            echo -e "\\E[0;41;36m      Add Socks  Ws/Grpc Account      \E[0m"
+            echo -e "\\E[0;41;36m      Add Socks  Ws/Grpc Account      \E[0m" | lolcat
             echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 			echo ""
 			echo "A client with the specified name was already created, please choose another name."
@@ -318,7 +318,7 @@ systemctl restart xray > /dev/null 2>&1
 service cron restart > /dev/null 2>&1
 clear
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
-echo -e "\\E[0;41;36m        Socks WS/GRPC Account      \E[0m" | tee -a /etc/log-create-user.log
+echo -e "\\E[0;41;36m        Socks WS/GRPC Account      \E[0m" | lolcat | tee -a /etc/log-create-user.log 
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
 echo -e "Remarks : ${user}" | tee -a /etc/log-create-user.log
 echo -e "Password : ${pwd}" | tee -a /etc/log-create-user.log
@@ -329,9 +329,9 @@ echo -e "Network : ws/grpc" | tee -a /etc/log-create-user.log
 echo -e "Path : /socks-ws" | tee -a /etc/log-create-user.log
 echo -e "ServiceName : socks-grpc" | tee -a /etc/log-create-user.log
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
-echo -e "Link  WS : http://${domain}:81/socksws-$user.txt" | tee -a /etc/log-create-user.log
+echo -e "Link  WS : http://${domain}:81/socksws-$user.txt" | lolcat | tee -a /etc/log-create-user.log
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
-echo -e "Link  GRPC : http://${domain}:81/socksgrpc-$user.txt" | tee -a /etc/log-create-user.log
+echo -e "Link  GRPC : http://${domain}:81/socksgrpc-$user.txt" | lolcat | tee -a /etc/log-create-user.log
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
 echo -e "Expired On : $exp" | tee -a /etc/log-create-user.log
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log

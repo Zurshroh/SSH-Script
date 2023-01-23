@@ -143,13 +143,14 @@ echo ""
 read -n 1 -s -r -p "Press any key to back on menu"
 menu
 }
+Auther=.digvpn
 export sem=$( curl -s https://raw.githubusercontent.com/Zuz99/test/main/versions)
 export pak=$( cat /home/.ver)
 IPVPS=$(curl -s ipinfo.io/ip )
 ISPVPS=$( curl -s ipinfo.io/org )
-export Server_URL="raw.githubusercontent.com/Zuz99/test/main"
-#License_Key=$(cat /etc/${Auther}/license.key)
-#export Nama_Issued_License=$( curl -s https://${Server_URL}/validated-registered-license-key.txt | grep -w $License_Key | cut -d ' ' -f 7-100 | tr -d '\r' | tr -d '\r\n')
+export Server_URL="raw.githubusercontent.com/Locu-Locu/limit/main"
+License_Key=$(cat /usr/local/etc/.$Name.ini)
+export Nama_Issued_License=$( curl -s https://${Server_URL}/limit.txt | grep -w $License_Key | cut -d ' ' -f 7-100 | tr -d '\r' | tr -d '\r\n')
 clear
 echo -e "${BICyan} ┌─────────────────────────────────────────────────────┐${NC}"| lolcat 
 echo -e "${BICyan} │      Server Informations         |${NC}" | lolcat

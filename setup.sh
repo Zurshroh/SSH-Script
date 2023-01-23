@@ -1,6 +1,54 @@
 #!/bin/bash
 dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
 
+BURIQ () {
+    curl -sS https://raw.githubusercontent.com/Locu-Locu/awok/main/ipmini > /root/tmp
+    data=( `cat /root/tmp | grep -E "^### " | awk '{print $2}'` )
+    for user in "${data[@]}"
+    do
+    exp=( `grep -E "^### $user" "/root/tmp" | awk '{print $3}'` )
+    d1=(`date -d "$exp" +%s`)
+    d2=(`date -d "$biji" +%s`)
+    exp2=$(( (d1 - d2) / 86400 ))
+    if [[ "$exp2" -le "0" ]]; then
+    echo $user > /etc/.$user.ini
+    else
+    rm -f /etc/.$user.ini > /dev/null 2>&1
+    fi
+    done
+    rm -f /root/tmp
+}
+
+MYIP=$(curl -sS ipv4.icanhazip.com)
+Name=$(curl -sS https://raw.githubusercontent.com/Locu-Locu/awok/main/ipmini | grep $MYIP | awk '{print $2}')
+echo $Name > /usr/local/etc/.$Name.ini
+CekOne=$(cat /usr/local/etc/.$Name.ini)
+
+Bloman () {
+if [ -f "/etc/.$Name.ini" ]; then
+CekTwo=$(cat /etc/.$Name.ini)
+    if [ "$CekOne" = "$CekTwo" ]; then
+        res="Expired"
+    fi
+else
+res="Permission Accepted..." | lolcat r
+fi
+}
+
+PERMISSION () {
+    MYIP=$(curl -sS ipv4.icanhazip.com)
+    IZIN=$(curl -sS https://raw.githubusercontent.com/Locu-Locu/awok/main/ipmini | awk '{print $4}' | grep $MYIP)
+    if [ "$MYIP" = "$IZIN" ]; then
+    Bloman
+    else
+    res="Permission Denied!" | lolcat
+echo "Please Contact Admin" | lolcat
+echo "Telegram : t.me/Locu"| lolcat
+echo "Whatsapp : wa.me/+62xxxxxxxx"| lolcat
+    fi
+    BURIQ
+}
+clear
 # // Root Checking
 if [ "${EUID}" -ne 0 ]; then
 		echo -e "${EROR} Please Run This Script As Root User !"
@@ -104,7 +152,7 @@ clear && clear && clear
 clear;clear;clear
 
 # // Starting Setup Domain
-echo -e "${GREEN}Indonesian Language${NC}"
+echo -e "${GREEN}Indonesian Language${NC}" | lolcat
 echo -e "${YELLOW}-----------------------------------------------------${NC}"
 echo -e "Anda Ingin Menggunakan Domain Pribadi ?"
 echo -e "Atau Ingin Menggunakan Domain Otomatis ?"
@@ -118,7 +166,7 @@ echo -e "You Want to Use a Private Domain ?"
 echo -e "Or Want to Use Auto Domain ?"
 echo -e "If You Want Using Private Domain, Type ${GREEN}1${NC}"
 echo -e "else You Want using Automatic Domain, Type ${GREEN}2${NC}"
-echo -e "${YELLOW}-----------------------------------------------------${NC}"
+echo -e "${YELLOW}-----------------------------------------------------${NC}" 
 echo ""
 
 read -p "$( echo -e "${GREEN}Input Your Choose ? ${NC}(${YELLOW}1/2${NC})${NC} " )" choose_domain
@@ -178,7 +226,7 @@ RESULT=$(curl -sLX PUT "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_r
      -H "Content-Type: application/json" \
      --data '{"type":"A","name":"'${SUB_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}')
      
-echo "Host : $SUB_DOMAIN"
+echo "Host : $SUB_DOMAIN"  | lolcat
 echo $SUB_DOMAIN > /root/domain
 echo "IP=$SUB_DOMAIN" > /var/lib/scrz-prem/ipvps.conf
 sleep 1
@@ -293,16 +341,16 @@ echo -e "$white\033[0;34m┌─────────────────�
 echo -e "         ⇱ Install Vnat ⇲            	" |lolcat -a
 echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
 sleep 1 
-wget -q https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/Vnat.sh && chmod +x jembot.sh && ./jembot.sh
+wget -q https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/Vnat.sh && chmod +x Vnat.sh && ./Vnat.sh
 #install ssh-vpn
 echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
-echo -e " \E[41;1;39m          ⇱ Install SSH / WS ⇲           \E[0m$NC"
+echo -e " \E[41;1;39m          ⇱ Install SSH / WS ⇲           \E[0m$NC"  |lolcat -a
 echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
 sleep 1
 wget -q https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
 #install ins-xray
 echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
-echo -e " \E[41;1;39m            ⇱ Install Xray ⇲             \E[0m$NC"
+echo -e " \E[41;1;39m            ⇱ Install Xray ⇲             \E[0m$NC"  |lolcat -a
 echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
 sleep 1 
 wget -q https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
@@ -323,7 +371,7 @@ wget -q -O /usr/bin/running "https://raw.githubusercontent.com/${GitUser}/SSH-Sc
 wget -q -O /usr/bin/cek-trafik "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/cek-trafik.sh"
 wget -q -O /usr/bin/cek-speed "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/speedtes_cli.py"
 wget -q -O /usr/bin/cek-bandwidth "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/cek-bandwidth.sh"
-#wget -q -O /usr/bin/cek-ram "https://raw.githubusercontent.com/Zuz99/0/main/ram.sh"
+#wget -q -O /usr/bin/cek-ram "https://raw.githubusercontent.com/Locu-Locu/0/main/ram.sh"
 wget -q -O /usr/bin/limit-speed "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/limit-speed.sh"
 wget -q -O /usr/bin/menu-vless "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/menu-vless.sh"
 wget -q -O /usr/bin/menu-vmess "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/menu-vmess.sh"
@@ -431,25 +479,25 @@ else
 gg="AM"
 fi
 echo -e "[ ${green}Pleas Wait Update DB ${NC} ]"
-git clone https://github.com/Zuz99/limit.git /root/limit/ &> /dev/null
+git clone https://github.com/Locu-Locu/limit.git /root/limit/ &> /dev/null
 babu=$(cat /etc/.geovpn/license.key)
 echo -e "$babu $IP $Masa_Laku_License_Berlaku_Sampai" >> /root/limit/limit.txt
 cd /root/limit
-    git config --global user.email "zkendev@gmail.com" &> /dev/null
-    git config --global user.name "Zuz99" &> /dev/null
+    git config --global user.email "locufarm@gmail.com" &> /dev/null
+    git config --global user.name "Locu-Locu" &> /dev/null
     rm -fr .git &> /dev/null
     git init &> /dev/null
     git add . &> /dev/null
     git commit -m m &> /dev/null
     git branch -M main &> /dev/null
-    git remote add origin https://github.com/Zuz99/limit
-    git push -f https://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@github.com/Zuz99/limit.git &> /dev/null
+    git remote add origin https://github.com/Locu-Locu/limit
+    git push -f https://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@github.com/Locu-Locu/limit.git &> /dev/null
 cd
-echo "1.1" >> /home/.ver
+echo "1.0" >> /home/.ver
 rm -fr /root/limit
 curl -sS ifconfig.me > /etc/myipvps
 echo " "
-echo "=====================-[ Kenn Hiroyuki Premium ]-===================="
+echo "=====================-[ DIG VPN Premium ]-====================" | lolcat -r
 echo ""
 echo "------------------------------------------------------------"
 echo ""
@@ -493,7 +541,7 @@ echo ""
 echo ""
 echo "------------------------------------------------------------"
 echo ""
-echo "===============-[ Script Created By Kenn Hiroyuki ]-==============="
+echo "===============-[ Script Moded By Lamao ]-==============="
 echo -e ""
 echo ""
 echo "" | tee -a log-install.txt
@@ -510,4 +558,4 @@ read answer
 if [ "$answer" == "${answer#[Yy]}" ] ;then
 exit 0
 else
-reboot
+rm -rf setup.sh && reboot
