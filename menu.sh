@@ -109,6 +109,7 @@ else
     echo $sisa_hari > /etc/${Auther}/license-remaining-active-days.db
 fi
 '
+##permission/main/ipmini
 BURIQ () {
     curl -sS https://raw.githubusercontent.com/Zuz99/permission/main/ipmini > /root/tmp
     data=( `cat /root/tmp | grep -E "^### " | awk '{print $2}'` )
