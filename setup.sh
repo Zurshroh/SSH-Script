@@ -6,20 +6,20 @@ dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Dat
 MYIP=$(wget -qO- ipinfo.io/ip);
 IZIN=$( curl https://raw.githubusercontent.com/Zuz99/permission/main/ipmini | grep $MYIP )
 if [ $MYIP = $IZIN ]; then
-clear
-echo -e "${green}Permintaan diterima.....${NC}"
-sleep 5
+echo -e "${green}Permission Accepted...${NC}"
 else
-clear
-echo ""
+echo -e "${red}Permission Denied!${NC}";
+echo "Please Contact Admin"
+echo "Telegram : t.me/sshsedang4"
+echo "Whatsapp : 082311190332"
 rm -f setup.sh
-echo '                            ...                           '
-echo '        Tidak Dapat Menggunakan Script ini!     '
-echo '                            ...                           '
-echo '    	   Hubungi :!     							'
-echo '                  Telegram: t.me/locufarm                '
-sleep 20
 exit 0
+fi
+if [ -f "/etc/v2ray/domain" ]; then
+echo "Script Already Installed"
+exit 0
+fi
+
 # // Root Checking
 if [ "${EUID}" -ne 0 ]; then
 		echo -e "${EROR} Please Run This Script As Root User !"
