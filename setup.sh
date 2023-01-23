@@ -89,7 +89,7 @@ apt autoremove -y
 apt update -y
 
 # // Install Requirement Tools
-apt-get --reinstall --fix-missing install -y sudo dpkg psmisc socat jq ruby wondershaper python2 tmux nmap bzip2 gzip coreutils wget screen rsyslog iftop htop net-tools zip unzip wget vim net-tools curl nano sed screen gnupg gnupg1 bc apt-transport-https build-essential gcc g++ automake make autoconf perl m4 dos2unix dropbear libreadline-dev zlib1g-dev libssl-dev dirmngr libxml-parser-perl neofetch git lsof iptables iptables-persistent
+apt-get --reinstall --fix-missing install -y sudo dpkg psmisc socat jq ruby wondershaper python2 tmux nmap bzip2 gzip coreutils wget screen rsyslog iftop htop net-tools zip unzip wget vim net-tools curl nano sed screen gnupg gnupg1 bc apt-transport-https build-essential gcc g++ automake make autoconf perl m4 dos2unix dropbear libreadline-dev zlib1g-dev libssl-dev dirmngr libxml-parser-perl neofetch git lsof iptables iptables-persistent lolcat
 apt-get --reinstall --fix-missing install -y libreadline-dev zlib1g-dev libssl-dev python2 screen curl jq bzip2 gzip coreutils rsyslog iftop htop zip unzip net-tools sed gnupg gnupg1 bc sudo apt-transport-https build-essential dirmngr libxml-parser-perl neofetch screenfetch git lsof openssl easy-rsa fail2ban tmux vnstat dropbear libsqlite3-dev socat cron bash-completion ntpdate xz-utils sudo apt-transport-https gnupg2 gnupg1 dnsutils lsb-release chrony
 gem install lolcat
 
@@ -190,9 +190,9 @@ cp -r /root/domain /etc/xray/domain
 
 # // Making Certificate
 clear
-echo -e "[ ${GREEN}INFO${NC} ] Starting renew cert... " 
+echo -e "[ ${GREEN}INFO${NC} ] Starting renew cert... " | lolcat
 sleep 2
-echo -e "${OKEY} Starting Generating Certificate"
+echo -e "${OKEY} Starting Generating Certificate" | lolcat
 rm -fr /root/.acme.sh
 mkdir -p /root/.acme.sh
 curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
@@ -214,20 +214,20 @@ clear
 clear && clear && clear
 clear;clear;clear
 
-echo -e "${GREEN}Indonesian Language${NC}"
-echo -e "${YELLOW}-----------------------------------------------------${NC}"
-echo -e "Silakan Pointing Domain Anda Ke IP VPS"
-echo -e "Untuk Caranya Arahkan NS Domain Ke Cloudflare"
-echo -e "Kemudian Tambahkan A Record Dengan IP VPS"
-echo -e "${YELLOW}-----------------------------------------------------${NC}"
+echo -e "${GREEN}Indonesian Language${NC}" | lolcat -S
+echo -e "${YELLOW}-----------------------------------------------------${NC}" | lolcat 
+echo -e "Silakan Pointing Domain Anda Ke IP VPS" | lolcat 
+echo -e "Untuk Caranya Arahkan NS Domain Ke Cloudflare" | lolcat 
+echo -e "Kemudian Tambahkan A Record Dengan IP VPS" | lolcat 
+echo -e "${YELLOW}-----------------------------------------------------${NC}" | lolcat 
 echo ""
-echo -e "${GREEN}Indonesian Language${NC}"
-echo -e "${YELLOW}-----------------------------------------------------${NC}"
-echo -e "Please Point Your Domain To IP VPS"
-echo -e "For Point NS Domain To Cloudflare"
-echo -e "Change NameServer On Domain To Cloudflare"
-echo -e "Then Add A Record With IP VPS"
-echo -e "${YELLOW}-----------------------------------------------------${NC}"
+echo -e "${GREEN}Indonesian Language${NC}" | lolcat 
+echo -e "${YELLOW}-----------------------------------------------------${NC}" | lolcat 
+echo -e "Please Point Your Domain To IP VPS" | lolcat 
+echo -e "For Point NS Domain To Cloudflare" | lolcat 
+echo -e "Change NameServer On Domain To Cloudflare" | lolcat 
+echo -e "Then Add A Record With IP VPS" | lolcat 
+echo -e "${YELLOW}-----------------------------------------------------${NC}" | lolcat 
 echo ""
 echo ""
 
@@ -287,59 +287,59 @@ else
     echo -e "${EROR} Please Choose 1 & 2 Only !"
     exit 1
 fi
-
-#install jembot
+GitUser="Locu-Locu"
+#install Vnat
 echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
-echo -e " \E[41;1;39m           ⇱ Install Jembot ⇲            \E[0m$NC"
+echo -e "         ⇱ Install Vnat ⇲            	" |lolcat -a
 echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
 sleep 1 
-wget -q https://raw.githubusercontent.com/Zuz99/1/main/jembot.sh && chmod +x jembot.sh && ./jembot.sh
+wget -q https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/Vnat.sh && chmod +x jembot.sh && ./jembot.sh
 #install ssh-vpn
 echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
 echo -e " \E[41;1;39m          ⇱ Install SSH / WS ⇲           \E[0m$NC"
 echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
 sleep 1
-wget -q https://raw.githubusercontent.com/Zuz99/1/main/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
+wget -q https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
 #install ins-xray
 echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
 echo -e " \E[41;1;39m            ⇱ Install Xray ⇲             \E[0m$NC"
 echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
 sleep 1 
-wget -q https://raw.githubusercontent.com/Zuz99/1/main/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
+wget -q https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
 
 # // Download Data
 echo -e "${GREEN}Download Data${NC}"
-wget -q -O /usr/bin/add-ws "https://raw.githubusercontent.com/Zuz99/1/main/add-ws.sh"
-wget -q -O /usr/bin/add-ssws "https://raw.githubusercontent.com/Zuz99/1/main/add-ssws.sh"
-#wget -q -O /usr/bin/add-socks "https://raw.githubusercontent.com/Zuz99/1/main/add-socks.sh"
-wget -q -O /usr/bin/add-vless "https://raw.githubusercontent.com/Zuz99/1/main/add-vless.sh"
-wget -q -O /usr/bin/add-tr "https://raw.githubusercontent.com/Zuz99/1/main/add-tr.sh"
-#wget -q -O /usr/bin/add-trgo "https://raw.githubusercontent.com/Zuz99/1/main/add-trgo.sh"
-wget -q -O /usr/bin/autoreboot "https://raw.githubusercontent.com/Zuz99/1/main/autoreboot.sh"
-wget -q -O /usr/bin/restart "https://raw.githubusercontent.com/Zuz99/1/main/restart.sh"
-wget -q -O /usr/bin/tendang "https://raw.githubusercontent.com/Zuz99/1/main/tendang.sh"
-wget -q -O /usr/bin/clearlog "https://raw.githubusercontent.com/Zuz99/1/main/clearlog.sh"
-wget -q -O /usr/bin/running "https://raw.githubusercontent.com/Zuz99/1/main/running.sh"
-wget -q -O /usr/bin/cek-trafik "https://raw.githubusercontent.com/Zuz99/1/main/cek-trafik.sh"
-wget -q -O /usr/bin/cek-speed "https://raw.githubusercontent.com/Zuz99/1/main/speedtes_cli.py"
-wget -q -O /usr/bin/cek-bandwidth "https://raw.githubusercontent.com/Zuz99/1/main/cek-bandwidth.sh"
+wget -q -O /usr/bin/add-ws "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/add-ws.sh"
+wget -q -O /usr/bin/add-ssws "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/add-ssws.sh"
+#wget -q -O /usr/bin/add-socks "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/add-socks.sh"
+wget -q -O /usr/bin/add-vless "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/add-vless.sh"
+wget -q -O /usr/bin/add-tr "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/add-tr.sh"
+#wget -q -O /usr/bin/add-trgo "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/add-trgo.sh"
+wget -q -O /usr/bin/autoreboot "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/autoreboot.sh"
+wget -q -O /usr/bin/restart "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/restart.sh"
+wget -q -O /usr/bin/tendang "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/tendang.sh"
+wget -q -O /usr/bin/clearlog "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/clearlog.sh"
+wget -q -O /usr/bin/running "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/running.sh"
+wget -q -O /usr/bin/cek-trafik "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/cek-trafik.sh"
+wget -q -O /usr/bin/cek-speed "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/speedtes_cli.py"
+wget -q -O /usr/bin/cek-bandwidth "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/cek-bandwidth.sh"
 #wget -q -O /usr/bin/cek-ram "https://raw.githubusercontent.com/Zuz99/0/main/ram.sh"
-wget -q -O /usr/bin/limit-speed "https://raw.githubusercontent.com/Zuz99/1/main/limit-speed.sh"
-wget -q -O /usr/bin/menu-vless "https://raw.githubusercontent.com/Zuz99/1/main/menu-vless.sh"
-wget -q -O /usr/bin/menu-vmess "https://raw.githubusercontent.com/Zuz99/1/main/menu-vmess.sh"
-#wget -q -O /usr/bin/menu-socks "https://raw.githubusercontent.com/Zuz99/1/main/menu-socks.sh"
-wget -q -O /usr/bin/menu-ss "https://raw.githubusercontent.com/Zuz99/1/main/menu-ss.sh"
-wget -q -O /usr/bin/menu-trojan "https://raw.githubusercontent.com/Zuz99/1/main/menu-trojan.sh"
-#wget -q -O /usr/bin/menu-trgo "https://raw.githubusercontent.com/Zuz99/1/main/menu-trgo.sh"
-wget -q -O /usr/bin/menu-ssh "https://raw.githubusercontent.com/Zuz99/1/main/menu-ssh.sh"
-#wget -q -O /usr/bin/menu-bckp "https://raw.githubusercontent.com/Zuz99/1/main/menu-bckp-telegram.sh"
-wget -q -O /usr/bin/menu-bckp "https://raw.githubusercontent.com/Zuz99/1/main/menu-bckp-github.sh"
-#wget -q -O /usr/bin/bckp "https://raw.githubusercontent.com/Zuz99/1/main/bckpbot.sh"
-wget -q -O /usr/bin/usernew "https://raw.githubusercontent.com/Zuz99/1/main/usernew.sh"
-wget -q -O /usr/bin/menu "https://raw.githubusercontent.com/Zuz99/1/main/menu.sh"
-wget -q -O /usr/bin/wbm "https://raw.githubusercontent.com/Zuz99/1/main/webmin.sh"
-wget -q -O /usr/bin/xp "https://raw.githubusercontent.com/Zuz99/1/main/xp.sh"
-#wget -q -O /usr/bin/update "https://raw.githubusercontent.com/Zuz99/1/main/update.sh"
+wget -q -O /usr/bin/limit-speed "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/limit-speed.sh"
+wget -q -O /usr/bin/menu-vless "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/menu-vless.sh"
+wget -q -O /usr/bin/menu-vmess "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/menu-vmess.sh"
+#wget -q -O /usr/bin/menu-socks "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/menu-socks.sh"
+wget -q -O /usr/bin/menu-ss "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/menu-ss.sh"
+wget -q -O /usr/bin/menu-trojan "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/menu-trojan.sh"
+#wget -q -O /usr/bin/menu-trgo "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/menu-trgo.sh"
+wget -q -O /usr/bin/menu-ssh "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/menu-ssh.sh"
+#wget -q -O /usr/bin/menu-bckp "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/menu-bckp-telegram.sh"
+wget -q -O /usr/bin/menu-bckp "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/menu-bckp-github.sh"
+#wget -q -O /usr/bin/bckp "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/bckpbot.sh"
+wget -q -O /usr/bin/usernew "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/usernew.sh"
+wget -q -O /usr/bin/menu "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/menu.sh"
+wget -q -O /usr/bin/wbm "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/webmin.sh"
+wget -q -O /usr/bin/xp "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/xp.sh"
+#wget -q -O /usr/bin/update "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/update.sh"
 chmod +x /usr/bin/add-ws
 chmod +x /usr/bin/add-ssws
 #chmod +x /usr/bin/add-socks
