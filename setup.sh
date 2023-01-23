@@ -19,7 +19,7 @@ IZIN=$( curl -s https://raw.githubusercontent.com/Zuz99/permission/main/ipmini |
 if [ $MYIP = $IZIN ]; then
 echo -e "${green}Permission Accepted...${NC}" | lolcat
 else
-echo -e "${red}Permission Denied!${NC}";
+echo -e "${red}Permission Denied!${NC}"; | lolcat
 echo "Please Contact Admin"
 echo "Telegram : t.me/Locufarm"
 echo "Whatsapp : +628129xxxxxx"
