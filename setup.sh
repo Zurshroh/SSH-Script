@@ -52,7 +52,7 @@ red='\e[1;31m'
 green='\e[0;32m'
 NC='\e[0m'
 MYIP=$( curl -s https://ipinfo.io/ip/ );
-IZIN=$( curl https://raw.githubusercontent.com/Zuz99/permission/main/ipmini | grep $MYIP );
+IZIN=$( curl https://raw.githubusercontent.com/Zuz99/permission/main/ipmini | grep $MYIP )
 if [ $MYIP = $IZIN ]; then
 echo -e "${green}Permission Accepted...${NC}"
 else
