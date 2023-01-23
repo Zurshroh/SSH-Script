@@ -52,8 +52,8 @@ red='\e[1;31m'
 green='\e[0;32m'
 NC='\e[0m'
 MYIP=$(wget -qO- icanhazip.com);
-IZIN=$( curl -s https://raw.githubusercontent.com/Zuz99/permission/main/ipmini | grep $MYIP )
-if [ $MYIP = $IZIN ]; then
+IZIN=$( curl https://raw.githubusercontent.com/Zuz99/permission/main/ipmini | grep $MYIP )
+if  $MYIP = $IZIN; then
 echo -e "${green}Permission Accepted...${NC}"
 else
 echo -e "${red}Permission Denied!${NC}";
