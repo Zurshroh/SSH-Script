@@ -483,7 +483,7 @@ wget -q -O /usr/bin/menu-trojan "https://raw.githubusercontent.com/Locu-Locu/SSH
 #wget -q -O /usr/bin/menu-trgo "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/menu-trgo.sh"
 wget -q -O /usr/bin/menu-ssh "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/menu-ssh.sh"
 #wget -q -O /usr/bin/menu-bckp "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/menu-bckp-telegram.sh"
-wget -q -O /usr/bin/menu-bckp "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/menu-bckp-github.sh"
+wget -q -O /usr/bin/menu-bckp "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/menu-bckp.sh"
 #wget -q -O /usr/bin/bckp "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/bckpbot.sh"
 wget -q -O /usr/bin/usernew "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/usernew.sh"
 wget -q -O /usr/bin/menu "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/menu.sh"
