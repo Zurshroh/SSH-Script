@@ -1,53 +1,5 @@
-#!/bin/bash
 dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
-#########################
 
-BURIQ () {
-    curl -sS https://raw.githubusercontent.com/Locu-Locu/awok/main/ipmini > /root/tmp
-    data=( `cat /root/tmp | grep -E "^### " | awk '{print $2}'` )
-    for user in "${data[@]}"
-    do
-    exp=( `grep -E "^### $user" "/root/tmp" | awk '{print $3}'` )
-    d1=(`date -d "$exp" +%s`)
-    d2=(`date -d "$biji" +%s`)
-    exp2=$(( (d1 - d2) / 86400 ))
-    if [[ "$exp2" -le "0" ]]; then
-    echo $user > /etc/.$user.ini
-    else
-    rm -f /etc/.$user.ini > /dev/null 2>&1
-    fi
-    done
-    rm -f /root/tmp
-}
-
-MYIP=$(curl -sS ipv4.icanhazip.com)
-Name=$(curl -sS https://raw.githubusercontent.com/Locu-Locu/awok/main/ipmini | grep $MYIP | awk '{print $2}')
-echo $Name > /usr/local/etc/.$Name.ini
-CekOne=$(cat /usr/local/etc/.$Name.ini)
-
-Bloman () {
-if [ -f "/etc/.$Name.ini" ]; then
-CekTwo=$(cat /etc/.$Name.ini)
-    if [ "$CekOne" = "$CekTwo" ]; then
-        res="Expired"
-    fi
-else
-res="Permission Accepted..."
-fi
-}
-
-PERMISSION () {
-    MYIP=$(curl -sS ipv4.icanhazip.com)
-    IZIN=$(curl -sS https://raw.githubusercontent.com/Locu-Locu/awok/main/ipmini | awk '{print $4}' | grep $MYIP)
-    if [ "$MYIP" = "$IZIN" ]; then
-    Bloman
-    else
-    res="Permission Denied!" 
-    fi
-    BURIQ
-}
-
-clear
 # // Root Checking
 if [ "${EUID}" -ne 0 ]; then
 		echo -e "${EROR} Please Run This Script As Root User !"
@@ -91,6 +43,158 @@ export RECEIVE="[${YELLOW} RECEIVE ${NC}]"
 export BOLD="\e[1m"
 export WARNING="${RED}\e[5m"
 export UNDERLINE="\e[4m"
+'
+# // Exporting URL Host
+export Server_URL="raw.githubusercontent.com/Locu-Locu/test/main"
+export Server1_URL="raw.githubusercontent.com/Locu-Locu/limit/main"
+export Server_Port="443"
+export Server_IP="underfined"
+export Script_Mode="Stable"
+export Auther=".geovpn"
+
+# // Exporting Script Version
+export VERSION="1.1"
+ 
+# // Exporint IP AddressInformation
+export IP=$( curl -s https://ipinfo.io/ip/ )
+
+# // License Validating
+echo ""
+read -p "Input Your License Key : " Input_License_Key
+
+# // Checking Input Blank
+if [[ $Input_License_Key ==  "" ]]; then
+    echo -e "${EROR} Please Input License Key !${NC}"
+    exit 1
+fi
+
+# // Checking License Validate
+Key="$Input_License_Key"
+
+# // Set Time To Jakarta / GMT +7
+ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
+
+# // Algoritma Key
+algoritmakeys="1920192019209129403940293013912" 
+hashsuccess="$(echo -n "$Key" | sha256sum | cut -d ' ' -f 1)" 
+Sha256Successs="$(echo -n "$hashsuccess$algoritmakeys" | sha256sum | cut -d ' ' -f 1)" 
+License_Key=$Sha256Successs
+echo ""
+echo -e "${OKEY} Successfull Connected To Server"
+sleep 1
+
+# // Validate Result
+Getting_Data_On_Server=$( curl -s https://${Server_URL}/validated-registered-license-key.txt | grep $License_Key | cut -d ' ' -f 1 )
+if [[ "$Getting_Data_On_Server" == "$License_Key" ]]; then
+    mkdir -p /etc/${Auther}/
+    echo "$License_Key" > /etc/${Auther}/license.key
+    echo -e "${OKEY} License Validated !"
+    sleep 1
+else
+    echo -e "${EROR} Your License Key Not Valid !"
+    exit 1
+fi
+# // Checking Your VPS Blocked Or No
+if [[ $IP == "" ]]; then
+    echo -e "${EROR} Your IP Address Not Detected !"
+    exit 1
+else
+    # // Checking Data
+    export Check_Blacklist_Atau_Tidak=$( curl -s https://${Server_URL}/blacklist.txt | grep -w $License_Key | awk '{print $1}' | tr -d '\r' | tr -d '\r\n' | head -n1 )
+    if [[ $Check_Blacklist_Atau_Tidak == $IP ]]; then
+        echo -e "${EROR} 403 Forbidden ( Your VPS Has Been Blocked ) !"
+        exit 1
+    else
+        Skip='true'
+    fi
+fi
+# // cek limit
+export limit=$( curl -s https://${Server1_URL}/limit.txt | grep $License_Key | wc -l )
+export Install_Limited=$( curl -s https://${Server_URL}/validated-registered-license-key.txt | grep -w $License_Key | cut -d ' ' -f 2)
+if [[ $limit == $Install_Limited ]]; then
+        echo -e "${EROR} 403 Forbidden ( Your License Max Limit Install ) !"
+        exit 1
+    else
+        Skip='true'
+fi
+# // License Key Detail
+export Tanggal_Pembelian_License=`date +"%Y-%m-%d" -d "$dateFromServer"`
+export Nama_Issued_License=$( curl -s https://${Server_URL}/validated-registered-license-key.txt | grep -w $License_Key | cut -d ' ' -f 7| tr -d '\r' | tr -d '\r\n')
+export mekmek=$( curl -s https://${Server_URL}/validated-registered-license-key.txt | grep -w $License_Key | cut -d ' ' -f 3 | tr -d '\r' | tr -d '\r\n')
+export Masa_Laku_License_Berlaku_Sampai=`date -d "$mekmek days" +"%Y-%m-%d"`
+export Install_Limit=$( curl -s https://${Server_URL}/validated-registered-license-key.txt | grep -w $License_Key | cut -d ' ' -f 2 | tr -d '\r' | tr -d '\r\n')
+export Tipe_License=$( curl -s https://${Server_URL}/validated-registered-license-key.txt | grep -w $License_Key | cut -d ' ' -f 8 | tr -d '\r' | tr -d '\r\n')
+
+# // Ouputing Information
+echo -e "${OKEY} License Type / Edition ( ${GREEN}$Tipe_License Edition${NC} )" # > // Output Tipe License Dari Exporting
+echo -e "${OKEY} This License Issued to (${GREEN} $Nama_Issued_License ${NC})"
+echo -e "${OKEY} Subscription Started On (${GREEN} $Tanggal_Pembelian_License${NC} )"
+echo -e "${OKEY} Subscription Ended On ( ${GREEN}${Masa_Laku_License_Berlaku_Sampai}${NC} )"
+echo -e "${OKEY} Installation Limit ( ${GREEN}$Install_Limit VPS${NC} )"
+echo -e "${OKEY} Installation Usage ( ${GREEN}$limit VPS${NC} )"
+
+# // Exporting Expired Date
+export Tanggal_Sekarang=`date -d "0 days" +"%Y-%m-%d"`
+export Masa_Aktif_Dalam_Satuan_Detik=$(date -d "$Masa_Laku_License_Berlaku_Sampai" +%s)
+export Tanggal_Sekarang_Dalam_Satuan_Detik=$(date -d "$Tanggal_Sekarang" +%s)
+export Hasil_Pengurangan_Dari_Masa_Aktif_Dan_Hari_Ini_Dalam_Satuan_Detik=$(( (Masa_Aktif_Dalam_Satuan_Detik - Tanggal_Sekarang_Dalam_Satuan_Detik) / 86400 ))
+if [[ $Hasil_Pengurangan_Dari_Masa_Aktif_Dan_Hari_Ini_Dalam_Satuan_Detik -lt 0 ]]; then
+    echo -e "${EROR} Your License Expired On ( ${RED}$Masa_Laku_License_Berlaku_Sampai${NC} )"
+    exit 1
+else
+    echo -e "${OKEY} Your License Key = $(if [[ ${Hasil_Pengurangan_Dari_Masa_Aktif_Dan_Hari_Ini_Dalam_Satuan_Detik} -lt 5 ]]; then
+    echo -e "${RED}${Hasil_Pengurangan_Dari_Masa_Aktif_Dan_Hari_Ini_Dalam_Satuan_Detik}${NC} Days Left"; else
+    echo -e "${GREEN}${Hasil_Pengurangan_Dari_Masa_Aktif_Dan_Hari_Ini_Dalam_Satuan_Detik}${NC} Days Left"; fi )"
+fi
+'
+BURIQ () {
+    curl -sS https://raw.githubusercontent.com/Zuz99/permission/main/ipmini > /root/tmp
+    data=( `cat /root/tmp | grep -E "^### " | awk '{print $2}'` )
+    for user in "${data[@]}"
+    do
+    exp=( `grep -E "^### $user" "/root/tmp" | awk '{print $3}'` )
+    d1=(`date -d "$exp" +%s`)
+    d2=(`date -d "$biji" +%s`)
+    exp2=$(( (d1 - d2) / 86400 ))
+    if [[ "$exp2" -le "0" ]]; then
+    echo $user > /etc/.$user.ini
+    else
+    rm -f /etc/.$user.ini > /dev/null 2>&1
+    fi
+    done
+    rm -f /root/tmp
+}
+
+MYIP=$(curl -sS ipv4.icanhazip.com)
+Name=$(curl -sS https://raw.githubusercontent.com/Zuz99/permission/main/ipmini | grep $MYIP | awk '{print $2}')
+echo $Name > /usr/local/etc/.$Name.ini
+CekOne=$(cat /usr/local/etc/.$Name.ini)
+
+Bloman () {
+if [ -f "/etc/.$Name.ini" ]; then
+CekTwo=$(cat /etc/.$Name.ini)
+    if [ "$CekOne" = "$CekTwo" ]; then
+        res="Expired"
+    fi
+else
+res="Permission Accepted..."
+fi
+}
+
+PERMISSION () {
+    MYIP=$(curl -sS ipv4.icanhazip.com)
+    IZIN=$(curl -sS https://raw.githubusercontent.com/Zuz99/permission/main/ipmini | awk '{print $4}' | grep $MYIP)
+    if [ "$MYIP" = "$IZIN" ]; then
+    Bloman
+    else
+    res="Permission Denied!"
+    fi
+    BURIQ
+}
+# // Validate Successfull
+echo ""
+read -p "$( echo -e "Press ${CYAN}[ ${NC}${GREEN}Enter${NC} ${CYAN}]${NC} For Starting Installation") "
+echo ""
 
 # // cek old script
 if [[ -r /etc/xray/domain ]]; then
@@ -136,15 +240,8 @@ apt autoremove -y
 apt update -y
 
 # // Install Requirement Tools
-apt-get --reinstall --fix-missing install -y sudo dpkg psmisc socat jq ruby wondershaper\
- python2 tmux nmap socat bzip2 gzip coreutils wget screen rsyslog iftop htop net-tools zip\
- unzip wget vim net-tools curl nano sed screen gnupg gnupg1 bc apt-transport-https build-essential\
- gcc g++ automake make autoconf perl m4 dos2unix dropbear libreadline-dev zlib1g-dev libssl-dev dirmngr\
- libxml-parser-perl neofetch git lsof iptables iptables-persistent lolcat
-apt-get --reinstall --fix-missing install -y libreadline-dev zlib1g-dev libssl-dev python2 screen curl\
- jq bzip2 gzip coreutils rsyslog iftop htop zip unzip net-tools sed gnupg gnupg1 bc sudo apt-transport-https build-essential\
- dirmngr libxml-parser-perl neofetch screenfetch git lsof openssl easy-rsa fail2ban tmux vnstat dropbear libsqlite3-dev socat cron\
- bash-completion ntpdate xz-utils sudo apt-transport-https gnupg2 gnupg1 dnsutils lsb-release chrony
+apt-get --reinstall --fix-missing install -y sudo dpkg psmisc socat jq ruby wondershaper python2 tmux nmap bzip2 gzip coreutils wget screen rsyslog iftop htop net-tools zip unzip wget vim net-tools curl nano sed screen gnupg gnupg1 bc apt-transport-https build-essential gcc g++ automake make autoconf perl m4 dos2unix dropbear libreadline-dev zlib1g-dev libssl-dev dirmngr libxml-parser-perl neofetch git lsof iptables iptables-persistent
+apt-get --reinstall --fix-missing install -y libreadline-dev zlib1g-dev libssl-dev python2 screen curl jq bzip2 gzip coreutils rsyslog iftop htop zip unzip net-tools sed gnupg gnupg1 bc sudo apt-transport-https build-essential dirmngr libxml-parser-perl neofetch screenfetch git lsof openssl easy-rsa fail2ban tmux vnstat dropbear libsqlite3-dev socat cron bash-completion ntpdate xz-utils sudo apt-transport-https gnupg2 gnupg1 dnsutils lsb-release chrony
 gem install lolcat
 
 # // Update & Upgrade
@@ -172,7 +269,7 @@ echo -e "You Want to Use a Private Domain ?"
 echo -e "Or Want to Use Auto Domain ?"
 echo -e "If You Want Using Private Domain, Type ${GREEN}1${NC}"
 echo -e "else You Want using Automatic Domain, Type ${GREEN}2${NC}"
-echo -e "${YELLOW}-----------------------------------------------------${NC}" 
+echo -e "${YELLOW}-----------------------------------------------------${NC}"
 echo ""
 
 read -p "$( echo -e "${GREEN}Input Your Choose ? ${NC}(${YELLOW}1/2${NC})${NC} " )" choose_domain
@@ -200,11 +297,10 @@ mkdir -p /usr/local/etc/xray
 
 # // String / Request Data
 sub=$(</dev/urandom tr -dc a-z0-9 | head -c4)
-DOMAIN=digvpn.my.id
-SUB_DOMAIN=pb-${sub}.digvpn.my.id
-NS_DOMAIN=sl-${sub}.digvpn.my.id
-CF_ID=andri.myid@gmail.com
-CF_KEY=1b2fb1e96e256e71b8b707613445dac391f8f
+DOMAIN=vpnmurah.me
+SUB_DOMAIN=${sub}.vpnmurah.me
+CF_ID=paoandest@gmail.com
+CF_KEY=1d158d0efc4eef787222cefff0b6d20981462
 set -euo pipefail
 IP=$(curl -sS ifconfig.me);
 echo "Updating DNS for ${SUB_DOMAIN}..."
@@ -244,7 +340,7 @@ cp -r /root/domain /etc/xray/domain
 
 # // Making Certificate
 clear
-echo -e "[ ${GREEN}INFO${NC} ] Starting renew cert... "
+echo -e "[ ${GREEN}INFO${NC} ] Starting renew cert... " 
 sleep 2
 echo -e "${OKEY} Starting Generating Certificate"
 rm -fr /root/.acme.sh
@@ -269,10 +365,10 @@ clear && clear && clear
 clear;clear;clear
 
 echo -e "${GREEN}Indonesian Language${NC}"
-echo -e "${YELLOW}-----------------------------------------------------${NC}" 
-echo -e "Silakan Pointing Domain Anda Ke IP VPS" 
-echo -e "Untuk Caranya Arahkan NS Domain Ke Cloudflare" 
-echo -e "Kemudian Tambahkan A Record Dengan IP VPS" 
+echo -e "${YELLOW}-----------------------------------------------------${NC}"
+echo -e "Silakan Pointing Domain Anda Ke IP VPS"
+echo -e "Untuk Caranya Arahkan NS Domain Ke Cloudflare"
+echo -e "Kemudian Tambahkan A Record Dengan IP VPS"
 echo -e "${YELLOW}-----------------------------------------------------${NC}"
 echo ""
 echo -e "${GREEN}Indonesian Language${NC}"
@@ -280,7 +376,7 @@ echo -e "${YELLOW}-----------------------------------------------------${NC}"
 echo -e "Please Point Your Domain To IP VPS"
 echo -e "For Point NS Domain To Cloudflare"
 echo -e "Change NameServer On Domain To Cloudflare"
-echo -e "Then Add A Record With IP VPS" 
+echo -e "Then Add A Record With IP VPS"
 echo -e "${YELLOW}-----------------------------------------------------${NC}"
 echo ""
 echo ""
@@ -342,17 +438,27 @@ else
     exit 1
 fi
 
-#install Vnat
-wget -q https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/Vnat.sh && chmod +x Vnat.sh && ./Vnat.sh
+#install jembot
+echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
+echo -e " \E[41;1;39m           ⇱ Install Jembot ⇲            \E[0m$NC"
+echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
+sleep 1 
+wget -q https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/jembot.sh && chmod +x jembot.sh && ./jembot.sh
 #install ssh-vpn
+echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
+echo -e " \E[41;1;39m          ⇱ Install SSH / WS ⇲           \E[0m$NC"
+echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
 sleep 1
 wget -q https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
 #install ins-xray
+echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
+echo -e " \E[41;1;39m            ⇱ Install Xray ⇲             \E[0m$NC"
+echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
 sleep 1 
 wget -q https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
 
 # // Download Data
-echo -e "${GREEN}Download Data${NC}" 
+echo -e "${GREEN}Download Data${NC}"
 wget -q -O /usr/bin/add-ws "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/add-ws.sh"
 wget -q -O /usr/bin/add-ssws "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/add-ssws.sh"
 #wget -q -O /usr/bin/add-socks "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/add-socks.sh"
@@ -476,10 +582,10 @@ gg="AM"
 fi
 echo -e "[ ${green}Pleas Wait Update DB ${NC} ]"
 git clone https://github.com/Locu-Locu/limit.git /root/limit/ &> /dev/null
-babu=$(cat /etc/.digvpn/license.key)
+babu=$(cat /etc/.geovpn/license.key)
 echo -e "$babu $IP $Masa_Laku_License_Berlaku_Sampai" >> /root/limit/limit.txt
 cd /root/limit
-    git config --global user.email "locufarm@gmail.com" &> /dev/null
+    git config --global user.email "zkendev@gmail.com" &> /dev/null
     git config --global user.name "Locu-Locu" &> /dev/null
     rm -fr .git &> /dev/null
     git init &> /dev/null
@@ -489,11 +595,11 @@ cd /root/limit
     git remote add origin https://github.com/Locu-Locu/limit
     git push -f https://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@github.com/Locu-Locu/limit.git &> /dev/null
 cd
-echo "1.0" >> /home/.ver
+echo "1.1" >> /home/.ver
 rm -fr /root/limit
 curl -sS ifconfig.me > /etc/myipvps
 echo " "
-echo "=====================-[ DIG VPN Premium ]-====================" | lolcat
+echo "=====================-[ Kenn Hiroyuki Premium ]-===================="
 echo ""
 echo "------------------------------------------------------------"
 echo ""
@@ -537,7 +643,7 @@ echo ""
 echo ""
 echo "------------------------------------------------------------"
 echo ""
-echo "===============-[ Script Moded By Lamao ]-==============="
+echo "===============-[ Script Created By Kenn Hiroyuki ]-==============="
 echo -e ""
 echo ""
 echo "" | tee -a log-install.txt

@@ -41,7 +41,118 @@ export RECEIVE="[${YELLOW} RECEIVE ${NC}]"
 export BOLD="\e[1m"
 export WARNING="${RED}\e[5m"
 export UNDERLINE="\e[4m"
+'
+# // Exporting URL Host
+export Server_URL="raw.githubusercontent.com/kenDevXD/test/main"
+export Server1_URL="raw.githubusercontent.com/kenDevXD/limit/main"
+export Server_Port="443"
+export Server_IP="underfined"
+export Script_Mode="Stable"
+export Auther=".geovpn"
 
+# // Root Checking
+if [ "${EUID}" -ne 0 ]; then
+		echo -e "${EROR} Please Run This Script As Root User !"
+		exit 1
+fi
+
+# // Exporting IP Address
+export IP=$( curl -s https://ipinfo.io/ip/ )
+
+# // Exporting Network Interface
+export NETWORK_IFACE="$(ip route show to default | awk '{print $5}')"
+
+# // Validate Result ( 1 )
+touch /etc/${Auther}/license.key
+export Your_License_Key="$( cat /etc/${Auther}/license.key | awk '{print $1}' )"
+export Validated_Your_License_Key_With_Server="$( curl -s https://${Server_URL}/validated-registered-license-key.txt | grep -w $Your_License_Key | head -n1 | cut -d ' ' -f 1 )"
+if [[ "$Validated_Your_License_Key_With_Server" == "$Your_License_Key" ]]; then
+    validated='true'
+else
+    echo -e "${EROR} License Key Not Valid"
+    exit 1
+fi
+
+# // Checking VPS Status > Got Banned / No
+if [[ $IP == "$( curl -s https://${Server_URL}/blacklist.txt | cut -d ' ' -f 1 | grep -w $IP | head -n1 )" ]]; then
+    echo -e "${EROR} 403 Forbidden ( Your VPS Has Been Banned )"
+    exit  1
+fi
+
+# // Checking VPS Status > Got Banned / No
+if [[ $Your_License_Key == "$( curl -s https://${Server_URL} | cut -d ' ' -f 1 | grep -w $Your_License_Key | head -n1)" ]]; then
+    echo -e "${EROR} 403 Forbidden ( Your License Has Been Limited )"
+    exit  1
+fi
+
+# // Checking VPS Status > Got Banned / No
+if [[ 'Standart' == "$( curl -s https://${Server_URL}/validated-registered-license-key.txt | grep -w $Your_License_Key | head -n1 | cut -d ' ' -f 6 )" ]]; then 
+    License_Mode='Standart'
+elif [[ Pro == "$( curl -s https://${Server_URL}/validated-registered-license-key.txt | grep -w $Your_License_Key | head -n1 | cut -d ' ' -f 6 )" ]]; then 
+    License_Mode='Pro'
+else
+    echo -e "${EROR} Please Using Genuine License !"
+    exit 1
+fi
+
+# // Checking Script Expired
+exp=$( curl -s https://${Server1_URL}/limit.txt | grep -w $IP | cut -d ' ' -f 3 )
+now=`date -d "0 days" +"%Y-%m-%d"`
+expired_date=$(date -d "$exp" +%s)
+now_date=$(date -d "$now" +%s)
+sisa_hari=$(( ($expired_date - $now_date) / 86400 ))
+if [[ $sisa_hari -lt 0 ]]; then
+    echo $sisa_hari > /etc/${Auther}/license-remaining-active-days.db
+    echo -e "${EROR} Your License Key Expired ( $sisa_hari Days )"
+    exit 1
+else
+    echo $sisa_hari > /etc/${Auther}/license-remaining-active-days.db
+fi
+'
+BURIQ () {
+    curl -sS https://raw.githubusercontent.com/Zuz99/permission/main/ipmini > /root/tmp
+    data=( `cat /root/tmp | grep -E "^### " | awk '{print $2}'` )
+    for user in "${data[@]}"
+    do
+    exp=( `grep -E "^### $user" "/root/tmp" | awk '{print $3}'` )
+    d1=(`date -d "$exp" +%s`)
+    d2=(`date -d "$biji" +%s`)
+    exp2=$(( (d1 - d2) / 86400 ))
+    if [[ "$exp2" -le "0" ]]; then
+    echo $user > /etc/.$user.ini
+    else
+    rm -f /etc/.$user.ini > /dev/null 2>&1
+    fi
+    done
+    rm -f /root/tmp
+}
+
+MYIP=$(curl -sS ipv4.icanhazip.com)
+Name=$(curl -sS https://raw.githubusercontent.com/Zuz99/permission/main/ipmini | grep $MYIP | awk '{print $2}')
+echo $Name > /usr/local/etc/.$Name.ini
+CekOne=$(cat /usr/local/etc/.$Name.ini)
+
+Bloman () {
+if [ -f "/etc/.$Name.ini" ]; then
+CekTwo=$(cat /etc/.$Name.ini)
+    if [ "$CekOne" = "$CekTwo" ]; then
+        res="Expired"
+    fi
+else
+res="Permission Accepted..."
+fi
+}
+
+PERMISSION () {
+    MYIP=$(curl -sS ipv4.icanhazip.com)
+    IZIN=$(curl -sS https://raw.githubusercontent.com/Zuz99/permission/main/ipmini | awk '{print $4}' | grep $MYIP)
+    if [ "$MYIP" = "$IZIN" ]; then
+    Bloman
+    else
+    res="Permission Denied!"
+    fi
+    BURIQ
+}
 clear
 sspwd=$(cat /etc/xray/passwd)
 clear
@@ -65,7 +176,7 @@ echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━�
 		if [[ ${CLIENT_EXISTS} == '1' ]]; then
 clear
             echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-            echo -e "\\E[0;41;36m      Add Socks  Ws/Grpc Account      \E[0m" | lolcat
+            echo -e "\\E[0;41;36m      Add Socks  Ws/Grpc Account      \E[0m"
             echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 			echo ""
 			echo "A client with the specified name was already created, please choose another name."
@@ -318,7 +429,7 @@ systemctl restart xray > /dev/null 2>&1
 service cron restart > /dev/null 2>&1
 clear
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
-echo -e "\\E[0;41;36m        Socks WS/GRPC Account      \E[0m" | lolcat | tee -a /etc/log-create-user.log 
+echo -e "\\E[0;41;36m        Socks WS/GRPC Account      \E[0m" | tee -a /etc/log-create-user.log
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
 echo -e "Remarks : ${user}" | tee -a /etc/log-create-user.log
 echo -e "Password : ${pwd}" | tee -a /etc/log-create-user.log
@@ -329,9 +440,9 @@ echo -e "Network : ws/grpc" | tee -a /etc/log-create-user.log
 echo -e "Path : /socks-ws" | tee -a /etc/log-create-user.log
 echo -e "ServiceName : socks-grpc" | tee -a /etc/log-create-user.log
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
-echo -e "Link  WS : http://${domain}:81/socksws-$user.txt" | lolcat | tee -a /etc/log-create-user.log
+echo -e "Link  WS : http://${domain}:81/socksws-$user.txt" | tee -a /etc/log-create-user.log
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
-echo -e "Link  GRPC : http://${domain}:81/socksgrpc-$user.txt" | lolcat | tee -a /etc/log-create-user.log
+echo -e "Link  GRPC : http://${domain}:81/socksgrpc-$user.txt" | tee -a /etc/log-create-user.log
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
 echo -e "Expired On : $exp" | tee -a /etc/log-create-user.log
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
