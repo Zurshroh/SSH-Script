@@ -480,7 +480,7 @@ gg="AM"
 fi
 echo -e "[ ${green}Pleas Wait Update DB ${NC} ]"
 git clone https://github.com/Locu-Locu/limit.git /root/limit/ &> /dev/null
-babu=$(cat /etc/.geovpn/license.key)
+babu=$(cat /etc/.digvpn/license.key)
 echo -e "$babu $IP $Masa_Laku_License_Berlaku_Sampai" >> /root/limit/limit.txt
 cd /root/limit
     git config --global user.email "locufarm@gmail.com" &> /dev/null
