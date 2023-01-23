@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # // Exporting Language to UTF-8
 export LANG='en_US.UTF-8'
 export LANGUAGE='en_US.UTF-8'
@@ -32,6 +33,51 @@ export OKEY="[${GREEN} OKEY ${NC}]"
 export PENDING="[${YELLOW} PENDING ${NC}]"
 export SEND="[${YELLOW} SEND ${NC}]"
 export RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+
+BURIQ () {
+    curl -sS https://raw.githubusercontent.com/Zuz99/permission/main/ipmini > /root/tmp
+    data=( `cat /root/tmp | grep -E "^### " | awk '{print $2}'` )
+    for user in "${data[@]}"
+    do
+    exp=( `grep -E "^### $user" "/root/tmp" | awk '{print $3}'` )
+    d1=(`date -d "$exp" +%s`)
+    d2=(`date -d "$biji" +%s`)
+    exp2=$(( (d1 - d2) / 86400 ))
+    if [[ "$exp2" -le "0" ]]; then
+    echo $user > /etc/.$user.ini
+    else
+    rm -f /etc/.$user.ini > /dev/null 2>&1
+    fi
+    done
+    rm -f /root/tmp
+}
+
+MYIP=$(curl -sS ipv4.icanhazip.com)
+Name=$(curl -sS https://raw.githubusercontent.com/Zuz99/permission/main/ipmini | grep $MYIP | awk '{print $2}')
+echo $Name > /usr/local/etc/.$Name.ini
+CekOne=$(cat /usr/local/etc/.$Name.ini)
+
+Bloman () {
+if [ -f "/etc/.$Name.ini" ]; then
+CekTwo=$(cat /etc/.$Name.ini)
+    if [ "$CekOne" = "$CekTwo" ]; then
+        res="Expired"
+    fi
+else
+res="Permission Accepted..."
+fi
+}
+
+PERMISSION () {
+    MYIP=$(curl -sS ipv4.icanhazip.com)
+    IZIN=$(curl -sS https://raw.githubusercontent.com/Zuz99/permission/main/ipmini | awk '{print $4}' | grep $MYIP)
+    if [ "$MYIP" = "$IZIN" ]; then
+    Bloman
+    else
+    res="Permission Denied!"
+    fi
+    BURIQ
+}
 
 #install TOOLS
 apt install sudo dpkg psmisc socat jq ruby wondershaper python2\
@@ -245,13 +291,22 @@ else
     exit 1
 fi
 
-echo -e "install VNAT"
+#install jembot
+echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
+echo -e " \E[41;1;39m           ⇱ Install Jembot ⇲            \E[0m$NC"
+echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
 sleep 1 
 wget -q https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/jembot.sh && chmod +x jembot.sh && ./jembot.sh
-echo -e "install ssh-vpn"
+#install ssh-vpn
+echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
+echo -e " \E[41;1;39m          ⇱ Install SSH / WS ⇲           \E[0m$NC"
+echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
 sleep 1
 wget -q https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
-echo -e "install ins-xray"
+#install ins-xray
+echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
+echo -e " \E[41;1;39m            ⇱ Install Xray ⇲             \E[0m$NC"
+echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
 sleep 1 
 wget -q https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
 
@@ -271,7 +326,7 @@ wget -q -O /usr/bin/running "https://raw.githubusercontent.com/Locu-Locu/SSH-Scr
 wget -q -O /usr/bin/cek-trafik "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/cek-trafik.sh"
 wget -q -O /usr/bin/cek-speed "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/speedtes_cli.py"
 wget -q -O /usr/bin/cek-bandwidth "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/cek-bandwidth.sh"
-#wget -q -O /usr/bin/cek-ram "https://raw.githubusercontent.com/Locu-Locu/0/main/ram.sh"
+#wget -q -O /usr/bin/cek-ram "https://raw.githubusercontent.com/kenDevXD/0/main/ram.sh"
 wget -q -O /usr/bin/limit-speed "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/limit-speed.sh"
 wget -q -O /usr/bin/menu-vless "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/menu-vless.sh"
 wget -q -O /usr/bin/menu-vmess "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/menu-vmess.sh"
@@ -281,7 +336,7 @@ wget -q -O /usr/bin/menu-trojan "https://raw.githubusercontent.com/Locu-Locu/SSH
 #wget -q -O /usr/bin/menu-trgo "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/menu-trgo.sh"
 wget -q -O /usr/bin/menu-ssh "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/menu-ssh.sh"
 #wget -q -O /usr/bin/menu-bckp "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/menu-bckp-telegram.sh"
-wget -q -O /usr/bin/menu-bckp "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/menu-bckp.sh"
+wget -q -O /usr/bin/menu-bckp "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/menu-bckp-github.sh"
 #wget -q -O /usr/bin/bckp "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/bckpbot.sh"
 wget -q -O /usr/bin/usernew "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/usernew.sh"
 wget -q -O /usr/bin/menu "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/menu.sh"
@@ -379,25 +434,25 @@ else
 gg="AM"
 fi
 echo -e "[ ${green}Pleas Wait Update DB ${NC} ]"
-git clone https://github.com/Locu-Locu/limit.git /root/limit/ &> /dev/null
+git clone https://github.com/kenDevXD/limit.git /root/limit/ &> /dev/null
 babu=$(cat /etc/.geovpn/license.key)
 echo -e "$babu $IP $Masa_Laku_License_Berlaku_Sampai" >> /root/limit/limit.txt
 cd /root/limit
     git config --global user.email "zkendev@gmail.com" &> /dev/null
-    git config --global user.name "Locu-Locu" &> /dev/null
+    git config --global user.name "kenDevXD" &> /dev/null
     rm -fr .git &> /dev/null
     git init &> /dev/null
     git add . &> /dev/null
     git commit -m m &> /dev/null
     git branch -M main &> /dev/null
-    git remote add origin https://github.com/Locu-Locu/limit
-    git push -f https://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@github.com/Locu-Locu/limit.git &> /dev/null
+    git remote add origin https://github.com/kenDevXD/limit
+    git push -f https://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@github.com/kenDevXD/limit.git &> /dev/null
 cd
 echo "1.1" >> /home/.ver
 rm -fr /root/limit
 curl -sS ifconfig.me > /etc/myipvps
 echo " "
-echo "=====================-[ DIGVPN Premium ]-===================="
+echo "=====================-[ Kenn Hiroyuki Premium ]-===================="
 echo ""
 echo "------------------------------------------------------------"
 echo ""
@@ -453,7 +508,7 @@ rm -fr /root/setup.sh
 rm -fr /root/domain
 history -c
 
-echo -e "[ ${yell}WARNING${NC} ] Apakah Anda Ingin Reboot Sekarang ? (y/n)? "
+echo -ne "[ ${yell}WARNING${NC} ] Apakah Anda Ingin Reboot Sekarang ? (y/n)? "
 read answer
 if [ "$answer" == "${answer#[Yy]}" ] ;then
 exit 0
