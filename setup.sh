@@ -32,7 +32,7 @@ CekTwo=$(cat /etc/.$Name.ini)
         res="Expired"
     fi
 else
-res="Permission Accepted..." | lolcat 
+res="Permission Accepted..."
 fi
 }
 
@@ -138,6 +138,7 @@ apt update -y
 # // Install Requirement Tools
 apt-get --reinstall --fix-missing install -y sudo dpkg psmisc socat jq ruby wondershaper python2 tmux nmap socat bzip2 gzip coreutils wget screen rsyslog iftop htop net-tools zip unzip wget vim net-tools curl nano sed screen gnupg gnupg1 bc apt-transport-https build-essential gcc g++ automake make autoconf perl m4 dos2unix dropbear libreadline-dev zlib1g-dev libssl-dev dirmngr libxml-parser-perl neofetch git lsof iptables iptables-persistent lolcat
 apt-get --reinstall --fix-missing install -y libreadline-dev zlib1g-dev libssl-dev python2 screen curl jq bzip2 gzip coreutils rsyslog iftop htop zip unzip net-tools sed gnupg gnupg1 bc sudo apt-transport-https build-essential dirmngr libxml-parser-perl neofetch screenfetch git lsof openssl easy-rsa fail2ban tmux vnstat dropbear libsqlite3-dev socat cron bash-completion ntpdate xz-utils sudo apt-transport-https gnupg2 gnupg1 dnsutils lsb-release chrony
+apt-get install lolcat
 gem install lolcat
 
 # // Update & Upgrade
@@ -151,7 +152,7 @@ clear && clear && clear
 clear;clear;clear
 
 # // Starting Setup Domain
-echo -e "${GREEN}Indonesian Language${NC}" | lolcat
+echo -e "${GREEN}Indonesian Language${NC}"
 echo -e "${YELLOW}-----------------------------------------------------${NC}"
 echo -e "Anda Ingin Menggunakan Domain Pribadi ?"
 echo -e "Atau Ingin Menggunakan Domain Otomatis ?"
@@ -225,7 +226,7 @@ RESULT=$(curl -sLX PUT "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_r
      -H "Content-Type: application/json" \
      --data '{"type":"A","name":"'${SUB_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}')
      
-echo "Host : $SUB_DOMAIN"  | lolcat
+echo "Host : $SUB_DOMAIN"
 echo $SUB_DOMAIN > /root/domain
 echo "IP=$SUB_DOMAIN" > /var/lib/scrz-prem/ipvps.conf
 sleep 1
@@ -237,9 +238,9 @@ cp -r /root/domain /etc/xray/domain
 
 # // Making Certificate
 clear
-echo -e "[ ${GREEN}INFO${NC} ] Starting renew cert... " | lolcat
+echo -e "[ ${GREEN}INFO${NC} ] Starting renew cert... "
 sleep 2
-echo -e "${OKEY} Starting Generating Certificate" | lolcat
+echo -e "${OKEY} Starting Generating Certificate"
 rm -fr /root/.acme.sh
 mkdir -p /root/.acme.sh
 curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
@@ -261,14 +262,14 @@ clear
 clear && clear && clear
 clear;clear;clear
 
-echo -e "${GREEN}Indonesian Language${NC}" | lolcat 
+echo -e "${GREEN}Indonesian Language${NC}"
 echo -e "${YELLOW}-----------------------------------------------------${NC}" 
 echo -e "Silakan Pointing Domain Anda Ke IP VPS" 
 echo -e "Untuk Caranya Arahkan NS Domain Ke Cloudflare" 
 echo -e "Kemudian Tambahkan A Record Dengan IP VPS" 
 echo -e "${YELLOW}-----------------------------------------------------${NC}"
 echo ""
-echo -e "${GREEN}Indonesian Language${NC}" | 
+echo -e "${GREEN}Indonesian Language${NC}"
 echo -e "${YELLOW}-----------------------------------------------------${NC}"
 echo -e "Please Point Your Domain To IP VPS"
 echo -e "For Point NS Domain To Cloudflare"
@@ -337,7 +338,7 @@ fi
 GitUser="Locu-Locu"
 #install Vnat
 echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
-echo -e "         ⇱ Install Vnat ⇲            	" |lolcat 
+echo -e "         ⇱ Install Vnat ⇲            	" 
 echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
 sleep 1 
 wget -q https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/Vnat.sh && chmod +x Vnat.sh && ./Vnat.sh
@@ -355,7 +356,7 @@ sleep 1
 wget -q https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
 
 # // Download Data
-echo -e "${GREEN}Download Data${NC}" | lolcat 
+echo -e "${GREEN}Download Data${NC}" 
 wget -q -O /usr/bin/add-ws "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/add-ws.sh"
 wget -q -O /usr/bin/add-ssws "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/add-ssws.sh"
 #wget -q -O /usr/bin/add-socks "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/add-socks.sh"
@@ -496,7 +497,7 @@ echo "1.0" >> /home/.ver
 rm -fr /root/limit
 curl -sS ifconfig.me > /etc/myipvps
 echo " "
-echo "=====================-[ DIG VPN Premium ]-====================" | lolcat -r
+echo "=====================-[ DIG VPN Premium ]-====================" | lolcat
 echo ""
 echo "------------------------------------------------------------"
 echo ""
