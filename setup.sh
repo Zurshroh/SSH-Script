@@ -1,6 +1,8 @@
 #!/bin/bash
-
 dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
+
+apt-get install lolcat -y
+
 if [ "${EUID}" -ne 0 ]; then
 		echo "You need to run this script as root"
 		exit 1
@@ -15,7 +17,7 @@ NC='\e[0m'
 MYIP=$(wget -qO- icanhazip.com);
 IZIN=$( curl -s https://raw.githubusercontent.com/Zuz99/permission/main/ipmini | grep $MYIP )
 if [ $MYIP = $IZIN ]; then
-echo -e "${green}Permission Accepted...${NC}"
+echo -e "${green}Permission Accepted...${NC}" | lolcat
 else
 echo -e "${red}Permission Denied!${NC}";
 echo "Please Contact Admin"
