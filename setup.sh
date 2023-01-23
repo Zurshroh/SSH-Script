@@ -1,35 +1,6 @@
 #!/bin/bash
-#dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
+dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
 
-if [ "${EUID}" -ne 0 ]; then
-		echo "You need to run this script as root"
-		exit 1
-fi
-if [ "$(systemd-detect-virt)" == "openvz" ]; then
-		echo "OpenVZ is not supported"
-		exit 1
-fi
-red='\e[1;31m'
-green='\e[0;32m'
-NC='\e[0m'
-MYIP=$(wget -qO- icanhazip.com);
-IZIN=$( curl -s https://raw.githubusercontent.com/Locu-Locu/permission/main/ipmini | grep $MYIP )
-if [ $MYIP = $IZIN ]; then
-echo -e "${green}Permission Accepted...${NC}"
-else
-echo -e "${red}Permission Denied!${NC}";
-echo "Please Contact Admin"
-echo "Telegram : t.me/Locufarm"
-echo "Whatsapp : +628129xxxxxx"
-rm -f setup.sh
-exit 0
-fi
-# // Root Checking
-if [ "${EUID}" -ne 0 ]; then
-		echo -e "${EROR} Please Run This Script As Root User !"
-		exit 1
-fi
-clear
 # // Exporting Language to UTF-8
 export LANG='en_US.UTF-8'
 export LANGUAGE='en_US.UTF-8'
