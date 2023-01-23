@@ -341,59 +341,59 @@ else
     echo -e "${EROR} Please Choose 1 & 2 Only !"
     exit 1
 fi
-GitUser="Locu-Locu"
+
 #install Vnat
 echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
 echo -e "         ⇱ Install Vnat ⇲            	" 
 echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
 sleep 1 
-wget -q https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/Vnat.sh && chmod +x Vnat.sh && ./Vnat.sh
+wget -q https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/Vnat.sh && chmod +x Vnat.sh && ./Vnat.sh
 #install ssh-vpn
 echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
 echo -e " \E[41;1;39m          ⇱ Install SSH / WS ⇲           \E[0m$NC"  
 echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
 sleep 1
-wget -q https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
+wget -q https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
 #install ins-xray
 echo -e "$white\033[0;34m┌─────────────────────────────────────────┐${NC}"
 echo -e " \E[41;1;39m            ⇱ Install Xray ⇲             \E[0m$NC"  
 echo -e "$white\033[0;34m└─────────────────────────────────────────┘${NC}"
 sleep 1 
-wget -q https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
+wget -q https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
 
 # // Download Data
 echo -e "${GREEN}Download Data${NC}" 
-wget -q -O /usr/bin/add-ws "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/add-ws.sh"
-wget -q -O /usr/bin/add-ssws "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/add-ssws.sh"
-#wget -q -O /usr/bin/add-socks "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/add-socks.sh"
-wget -q -O /usr/bin/add-vless "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/add-vless.sh"
-wget -q -O /usr/bin/add-tr "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/add-tr.sh"
-#wget -q -O /usr/bin/add-trgo "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/add-trgo.sh"
-wget -q -O /usr/bin/autoreboot "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/autoreboot.sh"
-wget -q -O /usr/bin/restart "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/restart.sh"
-wget -q -O /usr/bin/tendang "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/tendang.sh"
-wget -q -O /usr/bin/clearlog "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/clearlog.sh"
-wget -q -O /usr/bin/running "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/running.sh"
-wget -q -O /usr/bin/cek-trafik "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/cek-trafik.sh"
-wget -q -O /usr/bin/cek-speed "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/speedtes_cli.py"
-wget -q -O /usr/bin/cek-bandwidth "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/cek-bandwidth.sh"
+wget -q -O /usr/bin/add-ws "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/add-ws.sh"
+wget -q -O /usr/bin/add-ssws "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/add-ssws.sh"
+#wget -q -O /usr/bin/add-socks "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/add-socks.sh"
+wget -q -O /usr/bin/add-vless "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/add-vless.sh"
+wget -q -O /usr/bin/add-tr "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/add-tr.sh"
+#wget -q -O /usr/bin/add-trgo "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/add-trgo.sh"
+wget -q -O /usr/bin/autoreboot "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/autoreboot.sh"
+wget -q -O /usr/bin/restart "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/restart.sh"
+wget -q -O /usr/bin/tendang "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/tendang.sh"
+wget -q -O /usr/bin/clearlog "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/clearlog.sh"
+wget -q -O /usr/bin/running "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/running.sh"
+wget -q -O /usr/bin/cek-trafik "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/cek-trafik.sh"
+wget -q -O /usr/bin/cek-speed "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/speedtes_cli.py"
+wget -q -O /usr/bin/cek-bandwidth "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/cek-bandwidth.sh"
 #wget -q -O /usr/bin/cek-ram "https://raw.githubusercontent.com/Locu-Locu/0/main/ram.sh"
-wget -q -O /usr/bin/limit-speed "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/limit-speed.sh"
-wget -q -O /usr/bin/menu-vless "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/menu-vless.sh"
-wget -q -O /usr/bin/menu-vmess "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/menu-vmess.sh"
-#wget -q -O /usr/bin/menu-socks "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/menu-socks.sh"
-wget -q -O /usr/bin/menu-ss "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/menu-ss.sh"
-wget -q -O /usr/bin/menu-trojan "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/menu-trojan.sh"
-#wget -q -O /usr/bin/menu-trgo "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/menu-trgo.sh"
-wget -q -O /usr/bin/menu-ssh "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/menu-ssh.sh"
-#wget -q -O /usr/bin/menu-bckp "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/menu-bckp-telegram.sh"
-wget -q -O /usr/bin/menu-bckp "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/menu-bckp-github.sh"
-#wget -q -O /usr/bin/bckp "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/bckpbot.sh"
-wget -q -O /usr/bin/usernew "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/usernew.sh"
-wget -q -O /usr/bin/menu "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/menu.sh"
-wget -q -O /usr/bin/wbm "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/webmin.sh"
-wget -q -O /usr/bin/xp "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/xp.sh"
-#wget -q -O /usr/bin/update "https://raw.githubusercontent.com/${GitUser}/SSH-Script/main/update.sh"
+wget -q -O /usr/bin/limit-speed "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/limit-speed.sh"
+wget -q -O /usr/bin/menu-vless "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/menu-vless.sh"
+wget -q -O /usr/bin/menu-vmess "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/menu-vmess.sh"
+#wget -q -O /usr/bin/menu-socks "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/menu-socks.sh"
+wget -q -O /usr/bin/menu-ss "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/menu-ss.sh"
+wget -q -O /usr/bin/menu-trojan "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/menu-trojan.sh"
+#wget -q -O /usr/bin/menu-trgo "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/menu-trgo.sh"
+wget -q -O /usr/bin/menu-ssh "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/menu-ssh.sh"
+#wget -q -O /usr/bin/menu-bckp "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/menu-bckp-telegram.sh"
+wget -q -O /usr/bin/menu-bckp "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/menu-bckp-github.sh"
+#wget -q -O /usr/bin/bckp "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/bckpbot.sh"
+wget -q -O /usr/bin/usernew "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/usernew.sh"
+wget -q -O /usr/bin/menu "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/menu.sh"
+wget -q -O /usr/bin/wbm "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/webmin.sh"
+wget -q -O /usr/bin/xp "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/xp.sh"
+#wget -q -O /usr/bin/update "https://raw.githubusercontent.com/Locu-Locu/SSH-Script/main/update.sh"
 chmod +x /usr/bin/add-ws
 chmod +x /usr/bin/add-ssws
 #chmod +x /usr/bin/add-socks
